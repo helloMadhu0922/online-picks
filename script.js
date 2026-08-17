@@ -18,7 +18,7 @@ async function loadProducts() {
 
     try {
 
-        const response = await fetch("products.json?v=4");
+        const response = await fetch("products.json?v=5");
 
         allProducts = await response.json();
 
