@@ -72,6 +72,8 @@ function renderProducts(products) {
 
         card.querySelector(".price").textContent = product.price;
 
+        card.querySelector(".store-badge").textContent = product.store;
+
         const button = card.querySelector(".buy-button");
 
         button.href = product.affiliateLink;
