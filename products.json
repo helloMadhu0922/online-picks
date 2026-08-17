@@ -28,5 +28,15 @@
         "added": "2026-07-23",
         "affiliateLink": "https://link.amazon/B0g4JwBuV",
         "store":"Amazon"
+    },
+    {
+        "id": 4,
+        "name": "Jewellery pouch at ₹194",
+        "category": "Fashion",
+        "price": "₹194",
+        "rating": 4.4,
+        "added": "2026-08-17",
+        "affiliateLink": "https://www.meesho.com/af_invite/483243069:youtube_long_form:8443704?p_id=540203358&ext_id=8xmfku&utm_source=youtube_long_form",
+        "store":"Meesho"
     }
 ]
