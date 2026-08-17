@@ -76,6 +76,8 @@ function renderProducts(products) {
 
         button.href = product.affiliateLink;
 
+        button.textContent = `Buy on ${product.store}`;
+
         // NEW Badge
 
         const badge = card.querySelector(".latest-badge");
