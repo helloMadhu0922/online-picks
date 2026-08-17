@@ -238,6 +238,32 @@ main{
 }
 
 /* ===========================
+   STORE BADGE
+=========================== */
+
+.store-badge{
+
+    display:inline-block;
+
+    align-self:flex-start;
+
+    background:#eef2ff;
+
+    color:#444;
+
+    padding:6px 12px;
+
+    border-radius:30px;
+
+    font-size:.85rem;
+
+    font-weight:600;
+
+    margin-bottom:20px;
+
+}
+
+/* ===========================
    BUY BUTTON
 =========================== */
 
