@@ -6,7 +6,8 @@
         "price": "₹98",
         "rating": 4.3,
         "added": "2026-07-20",
-        "affiliateLink": "https://link.amazon/B0cisYDvs"
+        "affiliateLink": "https://link.amazon/B0cisYDvs",
+        "store":"Amazon"
     },
      {
         "id": 2,
@@ -15,7 +16,8 @@
         "price": "₹1498",
         "rating": 4.5,
         "added": "2026-07-21",
-        "affiliateLink": "https://link.amazon/B093aOb5N"
+        "affiliateLink": "https://link.amazon/B093aOb5N",
+        "store":"Amazon"
     },
     {
         "id": 3,
@@ -24,6 +26,7 @@
         "price": "₹499",
         "rating": 4.1,
         "added": "2026-07-23",
-        "affiliateLink": "https://link.amazon/B0g4JwBuV"
+        "affiliateLink": "https://link.amazon/B0g4JwBuV",
+        "store":"Amazon"
     }
 ]
