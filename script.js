@@ -523,51 +523,45 @@ function setupProductImage(card, product) {
     const placeholder =
         card.querySelector(".image-placeholder");
 
-
     // No image provided
-
     if (!product.image) {
 
-        image.style.display =
-            "none";
-
-        placeholder.style.display =
-            "flex";
+        image.style.display = "none";
+        placeholder.style.display = "flex";
 
         return;
     }
 
-
+    // Set image information
     image.alt =
         product.name || "Product image";
 
+    // Show image when successfully loaded
+    image.onload = function () {
 
-    image.src =
-        product.image;
+        image.style.display = "block";
+        placeholder.style.display = "none";
 
+    };
 
-    image.onload =
-        function () {
+    // Show placeholder if image fails
+    image.onerror = function () {
 
-            image.style.display =
-                "block";
+        image.style.display = "none";
+        placeholder.style.display = "flex";
 
-            placeholder.style.display =
-                "none";
+    };
 
-        };
+    // Set image URL AFTER registering events
+    image.src = product.image;
 
+    // Handle cached/already-loaded images
+    if (image.complete && image.naturalWidth > 0) {
 
-    image.onerror =
-        function () {
+        image.style.display = "block";
+        placeholder.style.display = "none";
 
-            image.style.display =
-                "none";
-
-            placeholder.style.display =
-                "flex";
-
-        };
+    }
 
 }
 
