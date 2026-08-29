@@ -1,38 +1,77 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
 
-     <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NP8F2S4STN"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+    <!-- ===============================
+         Google Analytics
+    ================================ -->
 
-      gtag('config', 'G-NP8F2S4STN');
+    <script async
+        src="https://www.googletagmanager.com/gtag/js?id=G-NP8F2S4STN">
     </script>
 
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-NP8F2S4STN');
+    </script>
+
+
+    <!-- ===============================
+         Meta
+    ================================ -->
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
     <title>Online Picks | Hello Madhu Youtube Channel</title>
 
     <meta name="description"
-        content="Discover the latest Genuine products featured in our Hello Madhu Youtube Channel. Shop trusted recommendations with our affiliate links.">
+        content="Discover the latest genuine products featured in our Hello Madhu Youtube Channel. Shop trusted recommendations with our affiliate links.">
 
-    <link rel="stylesheet" href="style.css?v=14">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- ===============================
+         CSS
+    ================================ -->
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    <link rel="stylesheet"
+        href="style.css?v=15">
+
+
+    <!-- ===============================
+         Google Font
+    ================================ -->
+
+    <link rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
+
 </head>
+
 
 <body>
 
-    <!-- ================= HEADER ================= -->
+
+    <!-- ===============================
+         HEADER
+    ================================ -->
 
     <header>
 
@@ -48,11 +87,17 @@
 
     </header>
 
-    <!-- ================= MAIN ================= -->
+
+    <!-- ===============================
+         MAIN
+    ================================ -->
 
     <main class="container">
 
-        <!-- Search Section -->
+
+        <!-- ===============================
+             SEARCH
+        ================================ -->
 
         <section class="search-section">
 
@@ -64,7 +109,10 @@
 
         </section>
 
-        <!-- Result Count -->
+
+        <!-- ===============================
+             RESULT COUNT
+        ================================ -->
 
         <section class="info-bar">
 
@@ -74,19 +122,25 @@
 
         </section>
 
-        <!-- Products -->
+
+        <!-- ===============================
+             STORE SECTIONS
+        ================================ -->
 
         <section
             id="productsContainer"
-            class="products-grid">
+            class="stores-container">
 
-            <!-- Products are loaded by JavaScript -->
+            <!-- Store sections are created by JavaScript -->
 
         </section>
 
     </main>
 
-    <!-- ================= FOOTER ================= -->
+
+    <!-- ===============================
+         FOOTER
+    ================================ -->
 
     <footer>
 
@@ -105,11 +159,37 @@
 
     </footer>
 
-    <!-- ================= TEMPLATE ================= -->
+
+    <!-- ===============================
+         PRODUCT TEMPLATE
+    ================================ -->
 
     <template id="productTemplate">
 
-        <div class="product-card">
+        <article class="product-card">
+
+
+            <!-- Product Image -->
+
+            <div class="product-image-container">
+
+                <img
+                    class="product-image"
+                    alt=""
+                    loading="lazy">
+
+                <div class="image-placeholder">
+
+                    <span>🛍️</span>
+
+                    <p>Product</p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Card Header -->
 
             <div class="card-header">
 
@@ -121,22 +201,58 @@
 
             </div>
 
-            <h2 class="product-name"></h2>
+
+            <!-- Product Name -->
+
+            <h3 class="product-name"></h3>
+
+
+            <!-- Price -->
 
             <p class="price"></p>
+
+
+            <!-- Store -->
+
             <span class="store-badge"></span>
+
+
+            <!-- Normal Buy Button -->
+
             <a
                 class="buy-button"
                 target="_blank"
                 rel="noopener noreferrer">
+
+                Buy Now
+
             </a>
 
-        </div>
+
+            <!-- Multiple Links -->
+
+            <div class="product-links">
+
+                <p class="links-title">
+                    Available Options
+                </p>
+
+                <div class="links-list"></div>
+
+            </div>
+
+        </article>
 
     </template>
 
-    <script src="script.js?v=14"></script>
+
+    <!-- ===============================
+         JAVASCRIPT
+    ================================ -->
+
+    <script src="script.js?v=15"></script>
 
 </body>
 
 </html>
+```
