@@ -1,3 +1,4 @@
+```json
 [
     {
         "id": 1,
@@ -7,9 +8,9 @@
         "rating": 4.3,
         "added": "2026-07-20",
         "affiliateLink": "https://link.amazon/B0cisYDvs",
-        "store":"Amazon"
+        "store": "Amazon"
     },
-     {
+    {
         "id": 2,
         "name": "Mini Portable Washing Machine | Only ₹1498",
         "category": "Electronics",
@@ -17,7 +18,7 @@
         "rating": 4.5,
         "added": "2026-07-21",
         "affiliateLink": "https://link.amazon/B093aOb5N",
-        "store":"Amazon"
+        "store": "Amazon"
     },
     {
         "id": 3,
@@ -27,7 +28,7 @@
         "rating": 4.1,
         "added": "2026-07-23",
         "affiliateLink": "https://link.amazon/B0g4JwBuV",
-        "store":"Amazon"
+        "store": "Amazon"
     },
     {
         "id": 4,
@@ -37,17 +38,17 @@
         "rating": 4.4,
         "added": "2026-08-17",
         "affiliateLink": "https://www.meesho.com/af_invite/483243069:youtube_long_form:8443704?p_id=540203358&ext_id=8xmfku&utm_source=youtube_long_form",
-        "store":"Meesho"
+        "store": "Meesho"
     },
-     {
+    {
         "id": 5,
-        "name": "Moom & Star Light Rotating Projector, with Colors",
-        "category": "Fashion",
+        "name": "Moon & Star Light Rotating Projector, with Colors",
+        "category": "Home",
         "price": "₹252",
         "rating": 4.0,
         "added": "2026-08-18",
         "affiliateLink": "https://www.meesho.com/af_invite/483243069:youtube_long_form:9179122?p_id=595323799&ext_id=9ufus7&utm_source=youtube_long_form",
-        "store":"Meesho"
+        "store": "Meesho"
     },
     {
         "id": 6,
@@ -57,36 +58,37 @@
         "rating": 4.1,
         "added": "2026-08-18",
         "affiliateLink": "https://www.meesho.com/af_invite/483243069:youtube_long_form:8512634?p_id=1029533944&ext_id=h0yhh4&utm_source=youtube_long_form",
-        "store":"Meesho"
+        "store": "Meesho"
     },
-      {
-         "id": 7,
+    {
+        "id": 7,
         "name": "Cookwell Air Fryer - 5L With See Through Window - 1400W (Grey & Black)",
         "category": "Appliances",
         "price": "₹3399",
         "rating": 4.3,
         "added": "2026-08-21",
         "affiliateLink": "https://link.amazon/B0cguq7SY",
-        "store":"Amazon"
+        "store": "Amazon"
     },
     {
-     "id": 8,
-        "name": "Wooden Printing Blocks for Fabric & Paper | Handcrafted Block Printing Set | Pack of 10 ",
+        "id": 8,
+        "name": "Wooden Printing Blocks for Fabric & Paper | Handcrafted Block Printing Set | Pack of 10",
         "category": "Fashion",
         "price": "₹127",
         "rating": 4.1,
         "added": "2026-08-26",
         "affiliateLink": "https://www.meesho.com/af_invite/483243069:youtube_long_form:9152427?p_id=574769758&ext_id=9i7b6m&utm_source=youtube_long_form",
-        "store":"Meesho"
+        "store": "Meesho"
     },
     {
-     "id": 9,
+        "id": 9,
         "name": "Long Selfie Stick R1S-L (Large) with Wireless Remote and Selfie Light, Tripod Stand",
-        "category": "Appliances",
+        "category": "Electronics",
         "price": "₹293",
         "rating": 4.2,
         "added": "2026-08-29",
         "affiliateLink": "https://www.meesho.com/af_invite/483243069:youtube_long_form:9287212?p_id=603881975&ext_id=9zjabb&utm_source=youtube_long_form",
-        "store":"Meesho"
+        "store": "Meesho"
     }
 ]
+```
