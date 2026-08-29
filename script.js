@@ -1,4 +1,3 @@
-```javascript
 // ===============================
 // Online Picks
 // script.js
@@ -757,4 +756,3 @@ function trackAffiliateClick(
 // ===============================
 
 loadProducts();
-```
