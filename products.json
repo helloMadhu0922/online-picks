@@ -90,5 +90,16 @@
         "image": "images/Tripod.jpeg",
         "affiliateLink": "https://www.meesho.com/af_invite/483243069:youtube_long_form:9287212?p_id=603881975&ext_id=9zjabb&utm_source=youtube_long_form",
         "store": "Meesho"
+    },
+    {
+        "id": 10,
+        "name": "Sling Hand Bag",
+        "category": "Fashion",
+        "price": "₹157",
+        "rating": 4.0,
+        "added": "2026-08-30",
+        "image": "images/SlingHandBag.jpeg",
+        "affiliateLink": "https://www.meesho.com/af_invite/483243069:youtube_long_form:9357046?p_id=592317707&ext_id=9snf9n&utm_source=youtube_long_form",
+        "store": "Meesho"
     }
 ]
