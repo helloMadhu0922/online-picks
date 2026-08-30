@@ -27,7 +27,7 @@ async function loadProducts() {
     try {
 
         const response =
-            await fetch("products.json?v=21");
+            await fetch("products.json?v=22");
 
         if (!response.ok) {
             throw new Error("Unable to load products.json");
