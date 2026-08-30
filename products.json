@@ -1,36 +1,6 @@
 [
     {
         "id": 1,
-        "name": "Mini Jewellery Organiser Box | Only ₹98",
-        "category": "Fashion",
-        "price": "₹98",
-        "rating": 4.3,
-        "added": "2026-07-20",
-        "affiliateLink": "https://link.amazon/B0cisYDvs",
-        "store": "Amazon"
-    },
-    {
-        "id": 2,
-        "name": "Mini Portable Washing Machine | Only ₹1498",
-        "category": "Electronics",
-        "price": "₹1498",
-        "rating": 4.5,
-        "added": "2026-07-21",
-        "affiliateLink": "https://link.amazon/B093aOb5N",
-        "store": "Amazon"
-    },
-    {
-        "id": 3,
-        "name": "Purple Kurti Set at Only ₹499",
-        "category": "Fashion",
-        "price": "₹499",
-        "rating": 4.1,
-        "added": "2026-07-23",
-        "affiliateLink": "https://link.amazon/B0g4JwBuV",
-        "store": "Amazon"
-    },
-    {
-        "id": 4,
         "name": "Jewellery pouch at ₹176",
         "category": "Fashion",
         "price": "₹176",
@@ -40,17 +10,18 @@
         "store": "Meesho"
     },
     {
-        "id": 5,
+        "id": 2,
         "name": "Moon & Star Light Rotating Projector, with Colors",
         "category": "Home",
         "price": "₹252",
         "rating": 4.0,
         "added": "2026-08-18",
+        "image": "images/MoonLight.jpeg",
         "affiliateLink": "https://www.meesho.com/af_invite/483243069:youtube_long_form:9179122?p_id=595323799&ext_id=9ufus7&utm_source=youtube_long_form",
         "store": "Meesho"
     },
     {
-        "id": 6,
+        "id": 3,
         "name": "Kashmiri Bangles Set of 8",
         "category": "Fashion",
         "price": "₹144",
@@ -60,7 +31,7 @@
         "store": "Meesho"
     },
     {
-        "id": 7,
+        "id": 4,
         "name": "Cookwell Air Fryer - 5L With See Through Window - 1400W (Grey & Black)",
         "category": "Appliances",
         "price": "₹3399",
@@ -70,7 +41,7 @@
         "store": "Amazon"
     },
     {
-        "id": 8,
+        "id": 5,
         "name": "Wooden Printing Blocks for Fabric & Paper | Handcrafted Block Printing Set | Pack of 10",
         "category": "Fashion",
         "price": "₹127",
@@ -81,7 +52,7 @@
         "store": "Meesho"
     },
     {
-        "id": 9,
+        "id": 6,
         "name": "Long Selfie Stick R1S-L (Large) with Wireless Remote and Selfie Light, Tripod Stand",
         "category": "Electronics",
         "price": "₹293",
@@ -92,7 +63,7 @@
         "store": "Meesho"
     },
     {
-        "id": 10,
+        "id": 7,
         "name": "Sling Hand Bag",
         "category": "Fashion",
         "price": "₹157",
