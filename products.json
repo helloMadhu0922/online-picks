@@ -86,6 +86,17 @@
         "image": "images/RCstuntCar.jpeg",
         "affiliateLink": "https://link.amazon/B09LgWW9d",
         "store": "Amazon"
+    },
+    {
+        "id": 9,
+        "name": "Sling Hand Bag Part - 2",
+        "category": "Fashion",
+        "price": "₹156",
+        "rating": 4.1,
+        "added": "2026-09-01",
+        "image": "images/SlingBag-2.jpeg",
+        "affiliateLink": "https://www.meesho.com/af_invite/483243069:youtube_long_form:9493267?p_id=916088929&ext_id=f5eyqp&utm_source=youtube_long_form",
+        "store": "Meesho"
     }
     
 ]
