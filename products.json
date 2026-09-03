@@ -97,6 +97,39 @@
         "image": "images/SlingBag-2.jpeg",
         "affiliateLink": "https://www.meesho.com/af_invite/483243069:youtube_long_form:9493267?p_id=916088929&ext_id=f5eyqp&utm_source=youtube_long_form",
         "store": "Meesho"
+    },
+    {
+        "id": 10,
+        "name": "Sling Hand Bag Part - 3",
+        "category": "Fashion",
+        "price": "₹132",
+        "rating": 4.1,
+        "added": "2026-09-03",
+        "image": "images/SlingBag-3.jpeg",
+        "affiliateLink": "https://www.meesho.com/af_invite/483243069:youtube_long_form:9617124?p_id=267373381&ext_id=4f6qmd&utm_source=youtube_long_form",
+        "store": "Meesho"
+    },
+    {
+        "id": 11,
+        "name": "Sling Hand Bag Part - 4",
+        "category": "Fashion",
+        "price": "₹118",
+        "rating": 4.1,
+        "added": "2026-09-03",
+        "image": "images/SlingBag-4.jpeg",
+        "affiliateLink": "https://www.meesho.com/af_invite/483243069:youtube_long_form:9706341?p_id=194666386&ext_id=37wdjm&utm_source=youtube_long_form",
+        "store": "Meesho"
+    },
+    {
+        "id": 12,
+        "name": "Beats Jewellery Set",
+        "category": "Fashion",
+        "price": "₹206",
+        "rating": 4.3,
+        "added": "2026-09-03",
+        "image": "images/SlingBag-2.jpeg",
+        "affiliateLink": "https://www.meesho.com/af_invite/483243069:youtube_long_form:9493267?p_id=916088929&ext_id=f5eyqp&utm_source=youtube_long_form",
+        "store": "Meesho"
     }
     
 ]
