@@ -130,6 +130,17 @@
         "image": "images/BeatsJewellery.jpeg",
         "affiliateLink": "https://www.meesho.com/af_invite/483243069:youtube_long_form:9493267?p_id=916088929&ext_id=f5eyqp&utm_source=youtube_long_form",
         "store": "Meesho"
+    },
+    {
+        "id": 13,
+        "name": "Yello Ribbon Flowers",
+        "category": "Fashion",
+        "price": "₹170",
+        "rating": 4.6,
+        "added": "2026-09-06",
+        "image": "images/Flowers.jpeg",
+        "affiliateLink": "https://www.meesho.com/af_invite/483243069:youtube_long_form:9921706?p_id=625579875&ext_id=acgcir&utm_source=youtube_long_form",
+        "store": "Meesho"
     }
     
 ]
