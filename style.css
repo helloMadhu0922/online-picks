@@ -456,7 +456,7 @@ footer p{
     }
 
     .store-section{
-        padding:18px;
+        padding:15px;
         border-radius:18px;
     }
 
@@ -474,19 +474,71 @@ footer p{
         font-size:19px;
     }
 
+    /* TWO PRODUCTS SIDE BY SIDE */
     .store-products-grid{
-        grid-template-columns:1fr;
-        gap:18px;
+        grid-template-columns:repeat(2, minmax(0, 1fr));
+        gap:12px;
     }
 
     .product-card{
-        padding:18px;
+        padding:10px;
+        border-radius:14px;
     }
 
     .product-image-container{
-        height:230px;
+        height:150px;
+        border-radius:10px;
+        margin-bottom:10px;
     }
 
+    .card-header{
+        gap:4px;
+        margin-bottom:8px;
+    }
+
+    .category{
+        font-size:.65rem;
+        padding:4px 7px;
+    }
+
+    .latest-badge{
+        font-size:.6rem;
+        padding:4px 7px;
+    }
+
+    .product-name{
+        font-size:.9rem;
+        line-height:1.35;
+        margin-bottom:7px;
+    }
+
+    .price{
+        font-size:.95rem;
+        margin-bottom:9px;
+    }
+
+    .store-badge{
+        font-size:.65rem;
+        padding:4px 8px;
+        margin-bottom:10px;
+    }
+
+    .buy-button{
+        padding:9px 6px;
+        font-size:.8rem;
+        border-radius:8px;
+    }
+
+    .multi-link{
+        padding:7px 8px;
+        font-size:.7rem;
+        gap:5px;
+    }
+
+    .links-title{
+        font-size:.75rem;
+        margin-bottom:7px;
+    }
 }
 
 
@@ -497,11 +549,24 @@ footer p{
 @media(max-width:400px){
 
     .container{
-        width:92%;
+        width:94%;
+    }
+
+    .store-section{
+        padding:12px;
+    }
+
+    .store-products-grid{
+        grid-template-columns:repeat(2, minmax(0, 1fr));
+        gap:9px;
+    }
+
+    .product-card{
+        padding:8px;
     }
 
     .product-image-container{
-        height:210px;
+        height:135px;
     }
 
     .store-header h2{
@@ -509,7 +574,10 @@ footer p{
     }
 
     .product-name{
-        font-size:1rem;
+        font-size:.85rem;
     }
 
+    .price{
+        font-size:.9rem;
+    }
 }
