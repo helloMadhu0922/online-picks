@@ -152,6 +152,17 @@
         "image": "images/SlingBag-5.jpeg",
         "affiliateLink": "https://www.meesho.com/af_invite/483243069:youtube_long_form:10099426?p_id=540259503&ext_id=8xnmwf&utm_source=youtube_long_form",
         "store": "Meesho"
+    },
+    {
+        "id": 15,
+        "name": "Artificial Plant Leaves",
+        "category": "Home",
+        "price": "₹116",
+        "rating": 4.2,
+        "added": "2026-09-09",
+        "image": "images/FlowersPink.jpeg",
+        "affiliateLink": "https://www.meesho.com/af_invite/483243069:youtube_long_form:10241042?p_id=997308157&ext_id=ghrrwd&utm_source=youtube_long_form",
+        "store": "Meesho"
     }
     
 ]
