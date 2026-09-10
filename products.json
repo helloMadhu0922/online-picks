@@ -133,7 +133,7 @@
     },
     {
         "id": 13,
-        "name": "Yello Ribbon Flowers",
+        "name": "Yellow Ribbon Flowers",
         "category": "Fashion",
         "price": "₹170",
         "rating": 4.6,
@@ -162,6 +162,17 @@
         "added": "2026-09-09",
         "image": "images/FlowersPink.jpeg",
         "affiliateLink": "https://www.meesho.com/af_invite/483243069:youtube_long_form:10241042?p_id=997308157&ext_id=ghrrwd&utm_source=youtube_long_form",
+        "store": "Meesho"
+    },
+     {
+        "id": 16,
+        "name": "Make Up Organizer",
+        "category": "Fashion",
+        "price": "₹148",
+        "rating": 4.2,
+        "added": "2026-09-10",
+        "image": "images/Organiser.jpeg",
+        "affiliateLink": "https://www.meesho.com/af_invite/483243069:youtube_long_form:10339414?p_id=793002861&ext_id=d44sx9&utm_source=youtube_long_form",
         "store": "Meesho"
     }
     
