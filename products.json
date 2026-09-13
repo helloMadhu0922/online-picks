@@ -174,6 +174,28 @@
         "image": "images/Organiser.jpeg",
         "affiliateLink": "https://www.meesho.com/af_invite/483243069:youtube_long_form:10339414?p_id=793002861&ext_id=d44sx9&utm_source=youtube_long_form",
         "store": "Meesho"
+    },
+    {
+        "id": 17,
+        "name": "Iron On Patch Strickers",
+        "category": "Fashion",
+        "price": "₹92",
+        "rating": 4.0,
+        "added": "2026-09-13",
+        "image": "images/DressPrint.jpeg",
+        "affiliateLink": "https://affiliate.meesho.com/collection/MTAzNjYxNzM6Ojo6Ojpub3JtYWw=",
+        "store": "Meesho"
+    },
+    {
+        "id": 18,
+        "name": "Night Lamp Part - 1",
+        "category": "Gadgets",
+        "price": "₹287",
+        "rating": 4.2,
+        "added": "2026-09-13",
+        "image": "images/NightLamp-1.jpeg",
+        "affiliateLink": "https://www.meesho.com/af_invite/483243069:youtube_long_form:10677408?p_id=1039802271&ext_id=h72kkf&utm_source=youtube_long_form",
+        "store": "Meesho"
     }
     
 ]
