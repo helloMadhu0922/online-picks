@@ -196,6 +196,17 @@
         "image": "images/NightLamp-1.jpeg",
         "affiliateLink": "https://www.meesho.com/af_invite/483243069:youtube_long_form:10677408?p_id=1039802271&ext_id=h72kkf&utm_source=youtube_long_form",
         "store": "Meesho"
+    },
+    {
+         "id": 19,
+        "name": "Night Lamp Part - 2",
+        "category": "Gadgets",
+        "price": "₹134",
+        "rating": 4.3,
+        "added": "2026-09-14",
+        "image": "images/NightLamp-2.jpeg",
+        "affiliateLink": "https://www.meesho.com/af_invite/483243069:youtube_long_form:10677488?p_id=644945413&ext_id=anzf2d&utm_source=youtube_long_form",
+        "store": "Meesho"
     }
     
 ]
