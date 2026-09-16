@@ -218,5 +218,16 @@
         "image": "images/NightLamp-3.jpeg",
         "affiliateLink": "https://www.meesho.com/af_invite/483243069:youtube_long_form:10814329?p_id=407797525&ext_id=6qsil1&utm_source=youtube_long_form",
         "store": "Meesho"
+    },
+    {
+         "id": 21,
+        "name": "Sharara Set",
+        "category": "Fashion",
+        "price": "₹908",
+        "rating": 4.3,
+        "added": "2026-09-16",
+        "image": "images/ShararaSet.jpeg",
+        "affiliateLink": "https://www.meesho.com/af_invite/483243069:youtube_long_form:10902667?p_id=1041957841&ext_id=h8crtd&utm_source=youtube_long_form",
+        "store": "Meesho"
     }
 ]
