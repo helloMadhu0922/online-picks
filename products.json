@@ -229,5 +229,16 @@
         "image": "images/ShararaSet.jpeg",
         "affiliateLink": "https://www.meesho.com/af_invite/483243069:youtube_long_form:10902667?p_id=1041957841&ext_id=h8crtd&utm_source=youtube_long_form",
         "store": "Meesho"
+    },
+    {
+         "id": 22,
+        "name": "Tulips Cube Mirror Lamp",
+        "category": "Gadget",
+        "price": "₹147",
+        "rating": 4.3,
+        "added": "2026-09-18",
+        "image": "images/TulipsCubeMirrorLamp.jpeg",
+        "affiliateLink": "https://www.meesho.com/af_invite/483243069:youtube_long_form:11065144?p_id=447324762&ext_id=7ebpzu&utm_source=youtube_long_form",
+        "store": "Meesho"
     }
 ]
