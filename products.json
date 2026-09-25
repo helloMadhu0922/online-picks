@@ -273,5 +273,16 @@
         "image": "images/SiphonPump.jpeg",
         "affiliateLink": "https://www.meesho.com/af_invite/483243069:youtube_long_form:11537593?p_id=536702033&ext_id=8vjdxt&utm_source=youtube_long_form",
         "store": "Meesho"
+    },
+    {
+        "id": 26,
+        "name": "Foldable Water Bottle ",
+        "category": "Useful Product",
+        "price": "₹170",
+        "rating": 4.0,
+        "added": "2026-09-25",
+        "image": "images/FoldableBottle.jpeg",
+        "affiliateLink": "https://www.meesho.com/af_invite/483243069:youtube_long_form:11740567?p_id=1048554344&ext_id=hca5pk&utm_source=youtube_long_form",
+        "store": "Meesho"
     }
 ]
