@@ -284,5 +284,16 @@
         "image": "images/FoldableBottle.jpeg",
         "affiliateLink": "https://www.meesho.com/af_invite/483243069:youtube_long_form:11740567?p_id=1048554344&ext_id=hca5pk&utm_source=youtube_long_form",
         "store": "Meesho"
+    },
+    {
+        "id": 27,
+        "name": "Egg Pen Holder ",
+        "category": "Useful Product",
+        "price": "₹137",
+        "rating": 4.2,
+        "added": "2026-09-26",
+        "image": "images/EggPenHolder.jpeg",
+        "affiliateLink": "https://www.meesho.com/af_invite/483243069:youtube_long_form:11836221?p_id=891965572&ext_id=er1x1g&utm_source=youtube_long_form",
+        "store": "Meesho"
     }
 ]
