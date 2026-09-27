@@ -295,5 +295,16 @@
         "image": "images/EggPenHolder.jpeg",
         "affiliateLink": "https://www.meesho.com/af_invite/483243069:youtube_long_form:11836221?p_id=891965572&ext_id=er1x1g&utm_source=youtube_long_form",
         "store": "Meesho"
+    },
+    {
+        "id": 28,
+        "name": "Food Drying Net",
+        "category": "Useful Product",
+        "price": "₹295",
+        "rating": 4.2,
+        "added": "2026-09-27",
+        "image": "images/birdProtector.jpeg",
+        "affiliateLink": "https://affiliate.meesho.com/collection/MTE5MDg3MzI6Ojo6Ojpub3JtYWw=",
+        "store": "Meesho"
     }
 ]
