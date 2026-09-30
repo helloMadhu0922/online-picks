@@ -1,752 +1,182 @@
-// ===============================
-// Online Picks
-// script.js
-// ===============================
-
-const productsContainer =
-    document.getElementById("productsContainer");
-
-const searchInput =
-    document.getElementById("searchInput");
-
-const productCount =
-    document.getElementById("productCount");
-
-const productTemplate =
-    document.getElementById("productTemplate");
+const productsContainer = document.getElementById('productsContainer');
+const searchInput = document.getElementById('searchInput');
+const productCount = document.getElementById('productCount');
+const productTemplate = document.getElementById('productTemplate');
+const categoryChips = document.getElementById('categoryChips');
+const clearSearch = document.getElementById('clearSearch');
 
 let allProducts = [];
+let activeCategory = 'All';
 
-
-// ===============================
-// Load Products
-// ===============================
-
-async function loadProducts() {
-
-    try {
-
-        const response =
-            await fetch("products.json?v=40");
-
-        if (!response.ok) {
-            throw new Error("Unable to load products.json");
-        }
-
+async function loadProducts(){
+    try{
+        const response = await fetch('products.json?v=41');
+        if(!response.ok) throw new Error('Unable to load products.json');
         allProducts = await response.json();
-
-
-        // Latest product first
-
-        allProducts.sort(
-            (a, b) =>
-                new Date(b.added) - new Date(a.added)
-        );
-
-
+        allProducts.sort((a,b) => new Date(b.added) - new Date(a.added));
+        buildCategoryChips();
         renderProducts(allProducts);
-
-    } catch (error) {
-
-        productsContainer.innerHTML = `
-            <div class="error-message">
-                <h2>Unable to load products</h2>
-                <p>Please try again later.</p>
-            </div>
-        `;
-
-        productCount.textContent = "";
-
+    }catch(error){
+        productsContainer.innerHTML = '<div class="error-message"><h2>We could not load the picks</h2><p>Please refresh the page and try again.</p></div>';
+        productCount.textContent = '';
         console.error(error);
     }
-
 }
 
+function buildCategoryChips(){
+    const categories = [...new Set(allProducts.map(p => p.category).filter(Boolean))];
+    categoryChips.innerHTML = '';
+    ['All', ...categories].forEach(category => {
+        const chip = document.createElement('button');
+        chip.type = 'button';
+        chip.className = `category-chip${category === activeCategory ? ' active' : ''}`;
+        chip.textContent = category;
+        chip.addEventListener('click', () => {
+            activeCategory = category;
+            categoryChips.querySelectorAll('.category-chip').forEach(c => c.classList.remove('active'));
+            chip.classList.add('active');
+            renderFiltered();
+        });
+        categoryChips.appendChild(chip);
+    });
+}
 
-// ===============================
-// Render Products
-// ===============================
+function renderFiltered(){
+    const keyword = searchInput.value.toLowerCase().trim();
+    const filtered = allProducts.filter(product => {
+        const categoryMatch = activeCategory === 'All' || product.category === activeCategory;
+        if(!categoryMatch) return false;
+        if(!keyword) return true;
+        const fields = [product.name, product.category, product.store, product.price].filter(Boolean).join(' ').toLowerCase();
+        const linkMatch = Array.isArray(product.links) && product.links.some(link => (link.name || '').toLowerCase().includes(keyword));
+        return fields.includes(keyword) || linkMatch;
+    });
+    renderProducts(filtered);
+}
 
-function renderProducts(products) {
+function renderProducts(products){
+    productsContainer.innerHTML = '';
+    productCount.textContent = `${products.length} pick${products.length === 1 ? '' : 's'}${activeCategory !== 'All' ? ` in ${activeCategory}` : ''}`;
 
-    productsContainer.innerHTML = "";
-
-
-    // Product count
-
-    productCount.textContent =
-        `${products.length} Product${products.length !== 1 ? "s" : ""} Found`;
-
-
-    // No products
-
-    if (products.length === 0) {
-
-        productsContainer.innerHTML = `
-            <div class="no-products">
-
-                <h2>No products found.</h2>
-
-                <p>
-                    Try searching with another keyword.
-                </p>
-
-            </div>
-        `;
-
+    if(!products.length){
+        productsContainer.innerHTML = '<div class="no-products"><h2>Nothing matched that search</h2><p>Try another keyword or browse all categories.</p></div>';
         return;
     }
 
+    const productsByStore = products.reduce((stores, product) => {
+        const store = product.store || 'Other';
+        (stores[store] ||= []).push(product);
+        return stores;
+    }, {});
 
-    // ===============================
-    // Group By Store
-    // ===============================
+    Object.entries(productsByStore).forEach(([storeName, storeProducts]) => {
+        const section = document.createElement('section');
+        section.className = 'store-section';
 
-    const productsByStore =
-        products.reduce((stores, product) => {
+        const header = document.createElement('div');
+        header.className = 'store-header';
+        header.innerHTML = `<div class="store-title-area"><div class="store-icon">${getStoreIcon(storeName)}</div><div><h2>${escapeHtml(storeName)}</h2><p>${storeProducts.length} ${storeProducts.length === 1 ? 'pick' : 'picks'} to explore</p></div></div>`;
 
-            const storeName =
-                product.store || "Other";
-
-
-            if (!stores[storeName]) {
-                stores[storeName] = [];
-            }
-
-
-            stores[storeName].push(product);
-
-
-            return stores;
-
-        }, {});
-
-
-    // ===============================
-    // Create Store Sections
-    // ===============================
-
-    Object.entries(productsByStore)
-        .forEach(([storeName, storeProducts]) => {
-
-            const storeSection =
-                document.createElement("section");
-
-            storeSection.className =
-                "store-section";
-
-
-            // ===============================
-            // Store Header
-            // ===============================
-
-            const storeHeader =
-                document.createElement("div");
-
-            storeHeader.className =
-                "store-header";
-
-
-            const titleArea =
-                document.createElement("div");
-
-            titleArea.className =
-                "store-title-area";
-
-
-            const icon =
-                document.createElement("div");
-
-            icon.className =
-                "store-icon";
-
-            icon.textContent =
-                getStoreIcon(storeName);
-
-
-            const titleText =
-                document.createElement("div");
-
-
-            const title =
-                document.createElement("h2");
-
-            title.textContent =
-                storeName;
-
-
-            const count =
-                document.createElement("p");
-
-            count.textContent =
-                `${storeProducts.length} Product${storeProducts.length !== 1 ? "s" : ""}`;
-
-
-            titleText.appendChild(title);
-            titleText.appendChild(count);
-
-            titleArea.appendChild(icon);
-            titleArea.appendChild(titleText);
-
-            storeHeader.appendChild(titleArea);
-
-
-            // ===============================
-            // Product Grid
-            // ===============================
-
-            const productsGrid =
-                document.createElement("div");
-
-            productsGrid.className =
-                "store-products-grid";
-
-
-            // ===============================
-            // Create Product Cards
-            // ===============================
-
-            storeProducts.forEach(product => {
-
-                const card =
-                    createProductCard(product);
-
-                productsGrid.appendChild(card);
-
-            });
-
-
-            storeSection.appendChild(storeHeader);
-
-            storeSection.appendChild(productsGrid);
-
-            productsContainer.appendChild(storeSection);
-
-        });
-
+        const grid = document.createElement('div');
+        grid.className = 'store-products-grid';
+        storeProducts.forEach(product => grid.appendChild(createProductCard(product)));
+        section.append(header, grid);
+        productsContainer.appendChild(section);
+    });
 }
 
+function createProductCard(product){
+    const card = productTemplate.content.cloneNode(true);
+    card.querySelector('.category').textContent = product.category || 'General';
+    card.querySelector('.product-name').textContent = product.name || 'Product';
+    card.querySelector('.price').textContent = product.price || '';
+    card.querySelector('.store-badge').textContent = product.store || 'Store';
 
-// ===============================
-// Create Product Card
-// ===============================
-
-function createProductCard(product) {
-
-    const card =
-        productTemplate.content.cloneNode(true);
-
-
-    // ===============================
-    // Category
-    // ===============================
-
-    const category =
-        card.querySelector(".category");
-
-    category.textContent =
-        product.category || "General";
-
-
-    // ===============================
-    // Product Name
-    // ===============================
-
-    const productName =
-        card.querySelector(".product-name");
-
-    productName.textContent =
-        product.name || "Product";
-
-
-    // ===============================
-    // Price
-    // ===============================
-
-    const price =
-        card.querySelector(".price");
-
-    price.textContent =
-        product.price || "";
-
-
-    // ===============================
-    // Store
-    // ===============================
-
-    const storeBadge =
-        card.querySelector(".store-badge");
-
-    storeBadge.textContent =
-        product.store || "Store";
-
-
-    // ===============================
-    // NEW Badge
-    // ===============================
-
-    const latestBadge =
-        card.querySelector(".latest-badge");
-
-
-    if (!isNewProduct(product.added)) {
-
-        latestBadge.style.display =
-            "none";
-
+    const rating = card.querySelector('.rating');
+    if(product.rating){
+        rating.hidden = false;
+        rating.querySelector('b').textContent = Number(product.rating).toFixed(1);
     }
 
-
-    // ===============================
-    // Product Image
-    // ===============================
+    const latest = card.querySelector('.latest-badge');
+    if(!isNewProduct(product.added)) latest.remove();
 
     setupProductImage(card, product);
 
+    const buyButton = card.querySelector('.buy-button');
+    const productLinks = card.querySelector('.product-links');
+    const linksList = card.querySelector('.links-list');
 
-    // ===============================
-    // Normal Affiliate Link
-    // ===============================
-
-    const buyButton =
-        card.querySelector(".buy-button");
-
-
-    const productLinks =
-        card.querySelector(".product-links");
-
-
-    const linksList =
-        card.querySelector(".links-list");
-
-
-    // ===============================
-    // Multiple Links Product
-    // ===============================
-
-    if (
-        Array.isArray(product.links) &&
-        product.links.length > 0
-    ) {
-
-        // Hide normal Buy button
-
-        buyButton.style.display =
-            "none";
-
-
-        productLinks.style.display =
-            "block";
-
-
+    if(Array.isArray(product.links) && product.links.length){
+        buyButton.style.display = 'none';
         product.links.forEach((link, index) => {
-
-            if (
-                !link.affiliateLink
-            ) {
-                return;
-            }
-
-
-            const linkElement =
-                document.createElement("a");
-
-            linkElement.className =
-                "multi-link";
-
-
-            linkElement.href =
-                link.affiliateLink;
-
-            linkElement.target =
-                "_blank";
-
-            linkElement.rel =
-                "noopener noreferrer";
-
-
-            // Link name
-
-            const linkName =
-                document.createElement("span");
-
-            linkName.className =
-                "multi-link-name";
-
-            linkName.textContent =
-                link.name ||
-                `Option ${index + 1}`;
-
-
-            // Right side
-
-            const rightSide =
-                document.createElement("span");
-
-            rightSide.style.display =
-                "flex";
-
-            rightSide.style.alignItems =
-                "center";
-
-            rightSide.style.gap =
-                "8px";
-
-
-            // Link price
-
-            if (link.price) {
-
-                const linkPrice =
-                    document.createElement("span");
-
-                linkPrice.className =
-                    "multi-link-price";
-
-                linkPrice.textContent =
-                    link.price;
-
-                rightSide.appendChild(
-                    linkPrice
-                );
-
-            }
-
-
-            // Arrow
-
-            const arrow =
-                document.createElement("span");
-
-            arrow.className =
-                "multi-link-arrow";
-
-            arrow.textContent =
-                "→";
-
-
-            rightSide.appendChild(arrow);
-
-
-            linkElement.appendChild(linkName);
-
-            linkElement.appendChild(rightSide);
-
-
-            // ===============================
-            // Google Analytics
-            // ===============================
-
-            linkElement.addEventListener(
-                "click",
-                function () {
-
-                    trackAffiliateClick(
-                        product,
-                        link.name || `Option ${index + 1}`
-                    );
-
-                }
-            );
-
-
-            linksList.appendChild(
-                linkElement
-            );
-
+            if(!link.affiliateLink) return;
+            const el = document.createElement('a');
+            el.className = 'multi-link';
+            el.href = link.affiliateLink;
+            el.target = '_blank';
+            el.rel = 'noopener noreferrer';
+            el.innerHTML = `<span class="multi-link-name">${escapeHtml(link.name || `Option ${index + 1}`)}</span><span style="display:flex;align-items:center;gap:7px">${link.price ? `<span class="multi-link-price">${escapeHtml(link.price)}</span>` : ''}<span class="multi-link-arrow">↗</span></span>`;
+            el.addEventListener('click', () => trackAffiliateClick(product, link.name || `Option ${index + 1}`));
+            linksList.appendChild(el);
         });
-
-    }
-
-
-    // ===============================
-    // Normal Product
-    // ===============================
-
-    else {
-
-        productLinks.style.display =
-            "none";
-
-
-        if (product.affiliateLink) {
-
-            buyButton.href =
-                product.affiliateLink;
-
-            buyButton.textContent =
-                `Buy on ${product.store || "Store"}`;
-
-
-            // ===============================
-            // Google Analytics
-            // ===============================
-
-            buyButton.addEventListener(
-                "click",
-                function () {
-
-                    trackAffiliateClick(
-                        product,
-                        "Main Product"
-                    );
-
-                }
-            );
-
+    }else{
+        productLinks.style.display = 'none';
+        if(product.affiliateLink){
+            buyButton.href = product.affiliateLink;
+            buyButton.innerHTML = `View on ${escapeHtml(product.store || 'store')} <span>↗</span>`;
+            buyButton.addEventListener('click', () => trackAffiliateClick(product, 'Main Product'));
+        }else{
+            buyButton.style.display = 'none';
         }
-
-        else {
-
-            buyButton.style.display =
-                "none";
-
-        }
-
     }
-
-
     return card;
-
 }
 
-
-// ===============================
-// Product Image
-// ===============================
-
-function setupProductImage(card, product) {
-
-    const image =
-        card.querySelector(".product-image");
-
-    const placeholder =
-        card.querySelector(".image-placeholder");
-
-    // No image provided
-    if (!product.image) {
-
-        image.style.display = "none";
-        placeholder.style.display = "flex";
-
-        return;
-    }
-
-    // Set image information
-    image.alt =
-        product.name || "Product image";
-
-    // Show image when successfully loaded
-    image.onload = function () {
-
-        image.style.display = "block";
-        placeholder.style.display = "none";
-
-    };
-
-    // Show placeholder if image fails
-    image.onerror = function () {
-
-        image.style.display = "none";
-        placeholder.style.display = "flex";
-
-    };
-
-    // Set image URL AFTER registering events
+function setupProductImage(card, product){
+    const image = card.querySelector('.product-image');
+    const placeholder = card.querySelector('.image-placeholder');
+    if(!product.image) return;
+    image.alt = product.name || 'Product image';
+    image.onload = () => { image.style.display = 'block'; placeholder.style.display = 'none'; };
+    image.onerror = () => { image.style.display = 'none'; placeholder.style.display = 'flex'; };
     image.src = product.image;
-
-    // Handle cached/already-loaded images
-    if (image.complete && image.naturalWidth > 0) {
-
-        image.style.display = "block";
-        placeholder.style.display = "none";
-
-    }
-
 }
 
-
-// ===============================
-// Store Icons
-// ===============================
-
-function getStoreIcon(storeName) {
-
-    const store =
-        storeName.toLowerCase();
-
-
-    if (store.includes("amazon")) {
-        return "🛒";
-    }
-
-
-    if (store.includes("meesho")) {
-        return "🛍️";
-    }
-
-
-    if (store.includes("flipkart")) {
-        return "🛒";
-    }
-
-
-    if (store.includes("myntra")) {
-        return "👗";
-    }
-
-
-    return "🛍️";
-
+function getStoreIcon(storeName){
+    const store = storeName.toLowerCase();
+    if(store.includes('amazon')) return '◈';
+    if(store.includes('meesho')) return '✿';
+    if(store.includes('flipkart')) return '◆';
+    if(store.includes('myntra')) return '◇';
+    return '✦';
 }
 
+searchInput.addEventListener('input', () => {
+    clearSearch.style.display = searchInput.value ? 'block' : 'none';
+    renderFiltered();
+});
 
-// ===============================
-// Search
-// ===============================
+clearSearch.addEventListener('click', () => {
+    searchInput.value = '';
+    clearSearch.style.display = 'none';
+    renderFiltered();
+    searchInput.focus();
+});
 
-searchInput.addEventListener(
-    "input",
-    function () {
-
-        const keyword =
-            this.value
-                .toLowerCase()
-                .trim();
-
-
-        const filteredProducts =
-            allProducts.filter(product => {
-
-
-                // Main product fields
-
-                const mainFieldsMatch =
-
-                    (product.name || "")
-                        .toLowerCase()
-                        .includes(keyword)
-
-                    ||
-
-                    (product.category || "")
-                        .toLowerCase()
-                        .includes(keyword)
-
-                    ||
-
-                    (product.store || "")
-                        .toLowerCase()
-                        .includes(keyword);
-
-
-                if (mainFieldsMatch) {
-                    return true;
-                }
-
-
-                // ===============================
-                // Search Multiple Links
-                // ===============================
-
-                if (
-                    Array.isArray(product.links)
-                ) {
-
-                    return product.links.some(
-                        link =>
-                            (link.name || "")
-                                .toLowerCase()
-                                .includes(keyword)
-                    );
-
-                }
-
-
-                return false;
-
-            });
-
-
-        renderProducts(
-            filteredProducts
-        );
-
-    }
-);
-
-
-// ===============================
-// Check if Product is NEW
-// ===============================
-
-function isNewProduct(dateString) {
-
-    if (!dateString) {
-        return false;
-    }
-
-
-    const addedDate =
-        new Date(dateString);
-
-    const today =
-        new Date();
-
-
-    const difference =
-        today - addedDate;
-
-
-    const days =
-        difference /
-        (1000 * 60 * 60 * 24);
-
-
+function isNewProduct(dateString){
+    if(!dateString) return false;
+    const days = (new Date() - new Date(dateString)) / 86400000;
     return days >= 0 && days <= 7;
-
 }
 
-
-// ===============================
-// Google Analytics
-// ===============================
-
-function trackAffiliateClick(
-    product,
-    linkName
-) {
-
-    if (typeof gtag !== "function") {
-        return;
-    }
-
-
-    gtag(
-        "event",
-        "affiliate_click",
-        {
-
-            product_name:
-                product.name || "Unknown",
-
-            store:
-                product.store || "Unknown",
-
-            link_name:
-                linkName,
-
-            product_category:
-                product.category || "Unknown"
-
-        }
-    );
-
+function trackAffiliateClick(product, linkName){
+    if(typeof gtag !== 'function') return;
+    gtag('event','affiliate_click',{product_name:product.name || 'Unknown',store:product.store || 'Unknown',link_name:linkName,product_category:product.category || 'Unknown'});
 }
 
-
-// ===============================
-// Start App
-// ===============================
+function escapeHtml(value){
+    return String(value).replace(/[&<>'"]/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[char]));
+}
 
 loadProducts();
