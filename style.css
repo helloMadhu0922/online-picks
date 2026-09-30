@@ -9,11 +9,11 @@
 
     --line: #e8e6e1;
 
-    --accent: #8b6255;
-    --accent-dark: #6f4c41;
-    --accent-soft: #f2ebe7;
-
-    --green: #58705d;
+    /* Sage green theme */
+    --accent: #5f7865;
+    --accent-dark: #405846;
+    --accent-soft: #e8efe9;
+    --green: #52705a;
 
     --shadow-sm: 0 4px 18px rgba(35, 31, 27, 0.05);
     --shadow: 0 12px 35px rgba(35, 31, 27, 0.08);
