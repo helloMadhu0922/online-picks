@@ -15,7 +15,7 @@ let activeSort = "latest";
 
 async function loadProducts() {
     try {
-        const response = await fetch("./products.json?v=31");
+        const response = await fetch("./products.json?v=32");
 
         if (!response.ok) {
             throw new Error("Could not load products.json");
