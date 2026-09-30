@@ -1,40 +1,40 @@
-const productsContainer = document.getElementById('productsContainer');
-const searchInput = document.getElementById('searchInput');
-const productCount = document.getElementById('productCount');
-const productTemplate = document.getElementById('productTemplate');
-const categoryChips = document.getElementById('categoryChips');
-const clearSearch = document.getElementById('clearSearch');
-const storeFilter = document.getElementById('storeFilter');
-const sortSelect = document.getElementById('sortSelect');
+const productsContainer = document.getElementById("productsContainer");
+const searchInput = document.getElementById("searchInput");
+const productCount = document.getElementById("productCount");
+const productTemplate = document.getElementById("productTemplate");
+const categoryChips = document.getElementById("categoryChips");
+const clearSearch = document.getElementById("clearSearch");
+const storeFilter = document.getElementById("storeFilter");
+const sortSelect = document.getElementById("sortSelect");
 
 let allProducts = [];
-let activeCategory = 'All';
-let activeStore = 'All';
-let activeSort = 'latest';
+let activeCategory = "All";
+let activeStore = "All";
+let activeSort = "latest";
 
 
 async function loadProducts() {
     try {
-        const response = await fetch('./products.json?v=30', {
-            cache: 'no-store'
-        });
+        const response = await fetch("./products.json?v=31");
 
         if (!response.ok) {
-            throw new Error('Unable to load products.json');
+            throw new Error("Could not load products.json");
         }
 
         const data = await response.json();
 
         if (!Array.isArray(data)) {
-            throw new Error('products.json must contain an array');
+            throw new Error("products.json is not an array");
         }
 
-        allProducts = data.map(product => ({
-            ...product,
-            displayCategory: normalizeCategory(product.category)
-        }));
+        allProducts = data.map(function(product) {
+            return {
+                ...product,
+                displayCategory: normalizeCategory(product.category)
+            };
+        });
 
-        allProducts.sort((a, b) => {
+        allProducts.sort(function(a, b) {
             return new Date(b.added || 0) - new Date(a.added || 0);
         });
 
@@ -43,7 +43,7 @@ async function loadProducts() {
         renderFiltered();
 
     } catch (error) {
-        console.error('Product loading error:', error);
+        console.error("Product loading error:", error);
 
         productsContainer.innerHTML = `
             <div class="error-message">
@@ -53,23 +53,19 @@ async function loadProducts() {
             </div>
         `;
 
-        productCount.textContent = '';
+        productCount.textContent = "";
     }
 }
 
 
-/* -----------------------------
-   CATEGORY FILTER
------------------------------ */
-
 function normalizeCategory(category) {
-    const value = String(category || '').trim();
+    const value = String(category || "").trim();
 
-    if (value.toLowerCase() === 'gadget') {
-        return 'Gadgets';
+    if (value.toLowerCase() === "gadget") {
+        return "Gadgets";
     }
 
-    return value || 'General';
+    return value || "General";
 }
 
 
@@ -77,35 +73,37 @@ function buildCategoryChips() {
     const categories = [
         ...new Set(
             allProducts
-                .map(product => product.displayCategory)
+                .map(function(product) {
+                    return product.displayCategory;
+                })
                 .filter(Boolean)
         )
     ];
 
-    categoryChips.innerHTML = '';
+    categoryChips.innerHTML = "";
 
-    const allCategories = ['All', ...categories];
+    ["All", ...categories].forEach(function(category) {
+        const chip = document.createElement("button");
 
-    allCategories.forEach(category => {
-        const chip = document.createElement('button');
-
-        chip.type = 'button';
-        chip.className = 'category-chip';
+        chip.type = "button";
+        chip.className = "category-chip";
 
         if (category === activeCategory) {
-            chip.classList.add('active');
+            chip.classList.add("active");
         }
 
         chip.textContent = category;
 
-        chip.addEventListener('click', () => {
+        chip.addEventListener("click", function() {
             activeCategory = category;
 
             categoryChips
-                .querySelectorAll('.category-chip')
-                .forEach(item => item.classList.remove('active'));
+                .querySelectorAll(".category-chip")
+                .forEach(function(item) {
+                    item.classList.remove("active");
+                });
 
-            chip.classList.add('active');
+            chip.classList.add("active");
 
             renderFiltered();
         });
@@ -115,10 +113,6 @@ function buildCategoryChips() {
 }
 
 
-/* -----------------------------
-   STORE FILTER
------------------------------ */
-
 function buildStoreFilter() {
     if (!storeFilter) {
         return;
@@ -127,15 +121,18 @@ function buildStoreFilter() {
     const stores = [
         ...new Set(
             allProducts
-                .map(product => product.store)
+                .map(function(product) {
+                    return product.store;
+                })
                 .filter(Boolean)
         )
     ];
 
-    storeFilter.innerHTML = '<option value="All">All stores</option>';
+    storeFilter.innerHTML =
+        '<option value="All">All stores</option>';
 
-    stores.forEach(store => {
-        const option = document.createElement('option');
+    stores.forEach(function(store) {
+        const option = document.createElement("option");
 
         option.value = store;
         option.textContent = store;
@@ -147,21 +144,18 @@ function buildStoreFilter() {
 }
 
 
-/* -----------------------------
-   FILTER + SORT
------------------------------ */
-
 function renderFiltered() {
-    const keyword = searchInput.value.toLowerCase().trim();
+    const keyword =
+        searchInput.value.toLowerCase().trim();
 
-    let filtered = allProducts.filter(product => {
+    let filtered = allProducts.filter(function(product) {
 
         const categoryMatch =
-            activeCategory === 'All' ||
+            activeCategory === "All" ||
             product.displayCategory === activeCategory;
 
         const storeMatch =
-            activeStore === 'All' ||
+            activeStore === "All" ||
             product.store === activeStore;
 
         if (!categoryMatch || !storeMatch) {
@@ -180,18 +174,10 @@ function renderFiltered() {
             product.price
         ]
             .filter(Boolean)
-            .join(' ')
+            .join(" ")
             .toLowerCase();
 
-        const linkMatch =
-            Array.isArray(product.links) &&
-            product.links.some(link =>
-                String(link.name || '')
-                    .toLowerCase()
-                    .includes(keyword)
-            );
-
-        return searchableText.includes(keyword) || linkMatch;
+        return searchableText.includes(keyword);
     });
 
     filtered = sortProducts(filtered);
@@ -203,27 +189,31 @@ function renderFiltered() {
 function sortProducts(products) {
     const sorted = [...products];
 
-    if (activeSort === 'latest') {
-        sorted.sort((a, b) => {
-            return new Date(b.added || 0) - new Date(a.added || 0);
+    if (activeSort === "latest") {
+        sorted.sort(function(a, b) {
+            return new Date(b.added || 0) -
+                   new Date(a.added || 0);
         });
     }
 
-    if (activeSort === 'oldest') {
-        sorted.sort((a, b) => {
-            return new Date(a.added || 0) - new Date(b.added || 0);
+    if (activeSort === "oldest") {
+        sorted.sort(function(a, b) {
+            return new Date(a.added || 0) -
+                   new Date(b.added || 0);
         });
     }
 
-    if (activeSort === 'price-low') {
-        sorted.sort((a, b) => {
-            return getPriceNumber(a.price) - getPriceNumber(b.price);
+    if (activeSort === "price-low") {
+        sorted.sort(function(a, b) {
+            return getPriceNumber(a.price) -
+                   getPriceNumber(b.price);
         });
     }
 
-    if (activeSort === 'price-high') {
-        sorted.sort((a, b) => {
-            return getPriceNumber(b.price) - getPriceNumber(a.price);
+    if (activeSort === "price-high") {
+        sorted.sort(function(a, b) {
+            return getPriceNumber(b.price) -
+                   getPriceNumber(a.price);
         });
     }
 
@@ -237,7 +227,7 @@ function getPriceNumber(price) {
     }
 
     const number = Number(
-        String(price).replace(/[^\d.]/g, '')
+        String(price).replace(/[^\d.]/g, "")
     );
 
     return Number.isFinite(number)
@@ -246,43 +236,43 @@ function getPriceNumber(price) {
 }
 
 
-/* -----------------------------
-   RENDER PRODUCTS
------------------------------ */
-
 function renderProducts(products) {
-    productsContainer.innerHTML = '';
+    productsContainer.innerHTML = "";
 
-    let countText = `${products.length} pick`;
+    productCount.textContent =
+        products.length +
+        (products.length === 1 ? " pick" : " picks");
 
-    if (products.length !== 1) {
-        countText += 's';
-    }
+    if (products.length === 0) {
 
-    productCount.textContent = countText;
-
-    if (!products.length) {
         productsContainer.innerHTML = `
             <div class="no-products">
                 <div class="empty-icon">⌕</div>
                 <h2>Nothing matched your search</h2>
                 <p>Try another keyword or clear the filters.</p>
-                <button type="button" class="reset-button" id="resetFilters">
+                <button
+                    type="button"
+                    class="reset-button"
+                    id="resetFilters">
                     Clear filters
                 </button>
             </div>
         `;
 
-        const resetButton = document.getElementById('resetFilters');
+        const resetButton =
+            document.getElementById("resetFilters");
 
         if (resetButton) {
-            resetButton.addEventListener('click', resetFilters);
+            resetButton.addEventListener(
+                "click",
+                resetFilters
+            );
         }
 
         return;
     }
 
-    products.forEach(product => {
+    products.forEach(function(product) {
         productsContainer.appendChild(
             createProductCard(product)
         );
@@ -290,38 +280,34 @@ function renderProducts(products) {
 }
 
 
-/* -----------------------------
-   PRODUCT CARD
------------------------------ */
-
 function createProductCard(product) {
-    const card = productTemplate.content.cloneNode(true);
+    const card =
+        productTemplate.content.cloneNode(true);
 
-    const category = card.querySelector('.category');
-    const productName = card.querySelector('.product-name');
-    const price = card.querySelector('.price');
-    const storeBadge = card.querySelector('.store-badge');
-    const rating = card.querySelector('.rating');
-    const latestBadge = card.querySelector('.latest-badge');
+    card.querySelector(".category").textContent =
+        product.displayCategory || "General";
 
-    category.textContent =
-        product.displayCategory || 'General';
+    card.querySelector(".product-name").textContent =
+        product.name || "Product";
 
-    productName.textContent =
-        product.name || 'Product';
+    card.querySelector(".price").textContent =
+        product.price || "";
 
-    price.textContent =
-        product.price || '';
+    card.querySelector(".store-badge").textContent =
+        product.store || "Store";
 
-    storeBadge.textContent =
-        product.store || 'Store';
+    const rating =
+        card.querySelector(".rating");
 
     if (product.rating) {
         rating.hidden = false;
 
-        rating.querySelector('b').textContent =
+        rating.querySelector("b").textContent =
             Number(product.rating).toFixed(1);
     }
+
+    const latestBadge =
+        card.querySelector(".latest-badge");
 
     if (!isNewProduct(product.added)) {
         latestBadge.remove();
@@ -329,94 +315,107 @@ function createProductCard(product) {
 
     setupProductImage(card, product);
 
-    const buyButton = card.querySelector('.buy-button');
-    const productLinks = card.querySelector('.product-links');
-    const linksList = card.querySelector('.links-list');
+    const buyButton =
+        card.querySelector(".buy-button");
 
-    /*
-     * Multiple links
-     */
+    const productLinks =
+        card.querySelector(".product-links");
+
+    const linksList =
+        card.querySelector(".links-list");
+
+
     if (
         Array.isArray(product.links) &&
         product.links.length > 0
     ) {
-        buyButton.style.display = 'none';
 
-        product.links.forEach((link, index) => {
+        buyButton.style.display = "none";
+
+        product.links.forEach(function(link, index) {
 
             if (!link.affiliateLink) {
                 return;
             }
 
-            const linkElement =
-                document.createElement('a');
+            const element =
+                document.createElement("a");
 
-            linkElement.className = 'multi-link';
+            element.className = "multi-link";
 
-            linkElement.href =
+            element.href =
                 link.affiliateLink;
 
-            linkElement.target = '_blank';
+            element.target = "_blank";
 
-            linkElement.rel =
-                'noopener noreferrer';
+            element.rel =
+                "noopener noreferrer";
 
-            const linkName =
-                escapeHtml(
-                    link.name ||
-                    `Option ${index + 1}`
-                );
-
-            const linkPrice =
-                link.price
-                    ? `<span class="multi-link-price">${escapeHtml(link.price)}</span>`
-                    : '';
-
-            linkElement.innerHTML = `
+            element.innerHTML = `
                 <span class="multi-link-name">
-                    ${linkName}
+                    ${escapeHtml(
+                        link.name ||
+                        "Option " + (index + 1)
+                    )}
                 </span>
 
                 <span class="multi-link-right">
-                    ${linkPrice}
-                    <span class="multi-link-arrow">↗</span>
+                    ${
+                        link.price
+                            ? `<span class="multi-link-price">
+                                ${escapeHtml(link.price)}
+                               </span>`
+                            : ""
+                    }
+
+                    <span class="multi-link-arrow">
+                        ↗
+                    </span>
                 </span>
             `;
 
-            linkElement.addEventListener('click', () => {
-                trackAffiliateClick(
-                    product,
-                    link.name ||
-                    `Option ${index + 1}`
-                );
-            });
+            element.addEventListener(
+                "click",
+                function() {
+                    trackAffiliateClick(
+                        product,
+                        link.name ||
+                        "Option " + (index + 1)
+                    );
+                }
+            );
 
-            linksList.appendChild(linkElement);
+            linksList.appendChild(element);
         });
 
     } else {
 
-        productLinks.style.display = 'none';
+        productLinks.style.display = "none";
 
         if (product.affiliateLink) {
 
             buyButton.href =
                 product.affiliateLink;
 
-            buyButton.innerHTML = `
-                View on ${escapeHtml(product.store || 'store')}
-                <span>↗</span>
-            `;
+            buyButton.innerHTML =
+                "View on " +
+                escapeHtml(
+                    product.store || "store"
+                ) +
+                ' <span>↗</span>';
 
-            buyButton.addEventListener('click', () => {
-                trackAffiliateClick(
-                    product,
-                    'Main Product'
-                );
-            });
+            buyButton.addEventListener(
+                "click",
+                function() {
+                    trackAffiliateClick(
+                        product,
+                        "Main Product"
+                    );
+                }
+            );
 
         } else {
-            buyButton.style.display = 'none';
+            buyButton.style.display = "none";
         }
     }
 
@@ -424,23 +423,24 @@ function createProductCard(product) {
 }
 
 
-/* -----------------------------
-   IMAGE FIX
------------------------------ */
+/* =========================
+   IMAGE HANDLING
+========================= */
 
 function setupProductImage(card, product) {
+
     const image =
-        card.querySelector('.product-image');
+        card.querySelector(".product-image");
 
     const placeholder =
-        card.querySelector('.image-placeholder');
+        card.querySelector(".image-placeholder");
 
     if (!product.image) {
         return;
     }
 
     image.alt =
-        product.name || 'Product image';
+        product.name || "Product image";
 
     const imageUrl =
         getImageUrl(product.image);
@@ -449,46 +449,38 @@ function setupProductImage(card, product) {
         return;
     }
 
-    const showImage = () => {
-        image.classList.add('is-loaded');
-        placeholder.classList.add('hidden');
-    };
+    function showImage() {
+        image.classList.add("is-loaded");
+        placeholder.classList.add("hidden");
+    }
 
-    const showPlaceholder = () => {
-        image.classList.remove('is-loaded');
-        placeholder.classList.remove('hidden');
+    function showPlaceholder() {
+        image.classList.remove("is-loaded");
+        placeholder.classList.remove("hidden");
 
         console.warn(
-            'Image could not be loaded:',
+            "Image failed:",
             product.image,
-            'Resolved URL:',
             imageUrl
         );
-    };
+    }
 
     image.addEventListener(
-        'load',
+        "load",
         showImage,
         { once: true }
     );
 
     image.addEventListener(
-        'error',
+        "error",
         showPlaceholder,
         { once: true }
     );
 
-    /*
-     * Important:
-     * Use document.baseURI so GitHub Pages project
-     * paths such as /online-picks/ work correctly.
-     */
     image.src = imageUrl;
 
-    /*
-     * Handles cached images.
-     */
     if (image.complete) {
+
         if (image.naturalWidth > 0) {
             showImage();
         } else {
@@ -499,31 +491,24 @@ function setupProductImage(card, product) {
 
 
 function getImageUrl(path) {
+
     if (!path) {
-        return '';
+        return "";
     }
 
     const rawPath =
         String(path)
             .trim()
-            .replace(/\\/g, '/');
+            .replace(/\\/g, "/");
 
-    /*
-     * Allow external image URLs too.
-     */
     if (/^https?:\/\//i.test(rawPath)) {
         return rawPath;
     }
 
-    /*
-     * Remove accidental leading ./ or /
-     * so GitHub Pages keeps the /online-picks/
-     * repository path.
-     */
     const cleanPath =
         rawPath
-            .replace(/^(\.\/)+/, '')
-            .replace(/^\/+/, '');
+            .replace(/^(\.\/)+/, "")
+            .replace(/^\/+/, "");
 
     try {
         return new URL(
@@ -532,89 +517,111 @@ function getImageUrl(path) {
         ).href;
     } catch (error) {
         console.error(
-            'Invalid image path:',
+            "Invalid image path:",
             path
         );
 
-        return '';
+        return "";
     }
 }
 
 
-/* -----------------------------
+/* =========================
    SEARCH
------------------------------ */
+========================= */
 
-searchInput.addEventListener('input', () => {
-    clearSearch.style.display =
-        searchInput.value
-            ? 'flex'
-            : 'none';
+searchInput.addEventListener(
+    "input",
+    function() {
 
-    renderFiltered();
-});
-
-
-clearSearch.addEventListener('click', () => {
-    searchInput.value = '';
-
-    clearSearch.style.display = 'none';
-
-    renderFiltered();
-
-    searchInput.focus();
-});
-
-
-/* -----------------------------
-   STORE + SORT CONTROLS
------------------------------ */
-
-if (storeFilter) {
-    storeFilter.addEventListener('change', () => {
-        activeStore = storeFilter.value;
+        clearSearch.style.display =
+            searchInput.value
+                ? "flex"
+                : "none";
 
         renderFiltered();
-    });
+    }
+);
+
+
+clearSearch.addEventListener(
+    "click",
+    function() {
+
+        searchInput.value = "";
+
+        clearSearch.style.display = "none";
+
+        renderFiltered();
+
+        searchInput.focus();
+    }
+);
+
+
+/* =========================
+   FILTERS
+========================= */
+
+if (storeFilter) {
+
+    storeFilter.addEventListener(
+        "change",
+        function() {
+
+            activeStore =
+                storeFilter.value;
+
+            renderFiltered();
+        }
+    );
 }
 
 
 if (sortSelect) {
-    sortSelect.addEventListener('change', () => {
-        activeSort = sortSelect.value;
 
-        renderFiltered();
-    });
+    sortSelect.addEventListener(
+        "change",
+        function() {
+
+            activeSort =
+                sortSelect.value;
+
+            renderFiltered();
+        }
+    );
 }
 
 
-/* -----------------------------
+/* =========================
    RESET
------------------------------ */
+========================= */
 
 function resetFilters() {
-    activeCategory = 'All';
-    activeStore = 'All';
-    activeSort = 'latest';
 
-    searchInput.value = '';
+    activeCategory = "All";
+    activeStore = "All";
+    activeSort = "latest";
 
-    clearSearch.style.display = 'none';
+    searchInput.value = "";
+
+    clearSearch.style.display = "none";
 
     if (storeFilter) {
-        storeFilter.value = 'All';
+        storeFilter.value = "All";
     }
 
     if (sortSelect) {
-        sortSelect.value = 'latest';
+        sortSelect.value = "latest";
     }
 
     categoryChips
-        .querySelectorAll('.category-chip')
-        .forEach(chip => {
+        .querySelectorAll(".category-chip")
+        .forEach(function(chip) {
+
             chip.classList.toggle(
-                'active',
-                chip.textContent === 'All'
+                "active",
+                chip.textContent === "All"
             );
         });
 
@@ -622,71 +629,74 @@ function resetFilters() {
 }
 
 
-/* -----------------------------
+/* =========================
    HELPERS
------------------------------ */
+========================= */
 
 function isNewProduct(dateString) {
+
     if (!dateString) {
         return false;
     }
 
-    const productDate =
+    const date =
         new Date(dateString);
 
-    if (Number.isNaN(productDate.getTime())) {
+    if (Number.isNaN(date.getTime())) {
         return false;
     }
 
     const days =
-        (new Date() - productDate) /
-        86400000;
+        (new Date() - date) / 86400000;
 
     return days >= 0 && days <= 7;
 }
 
 
 function trackAffiliateClick(product, linkName) {
-    if (typeof gtag !== 'function') {
+
+    if (typeof gtag !== "function") {
         return;
     }
 
     gtag(
-        'event',
-        'affiliate_click',
+        "event",
+        "affiliate_click",
         {
             product_name:
-                product.name || 'Unknown',
+                product.name || "Unknown",
 
             store:
-                product.store || 'Unknown',
+                product.store || "Unknown",
 
             link_name:
                 linkName,
 
             product_category:
-                product.category || 'Unknown'
+                product.category || "Unknown"
         }
     );
 }
 
 
 function escapeHtml(value) {
+
     return String(value).replace(
         /[&<>'"]/g,
-        character => ({
-            '&': '&amp;',
-            '<': '&lt;',
-            '>': '&gt;',
-            "'": '&#39;',
-            '"': '&quot;'
-        }[character])
+        function(character) {
+
+            const entities = {
+                "&": "&amp;",
+                "<": "&lt;",
+                ">": "&gt;",
+                "'": "&#39;",
+                '"': "&quot;"
+            };
+
+            return entities[character];
+        }
     );
 }
 
-
-/* -----------------------------
-   START
------------------------------ */
 
 loadProducts();
