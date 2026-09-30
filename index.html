@@ -186,40 +186,50 @@
 
 
         <!-- TOOLBAR -->
-        <div class="toolbar">
+      <div class="toolbar">
 
-            <label class="search-box" for="searchInput">
+    <div class="filter-row">
 
-                <span class="search-icon">
-                    ⌕
-                </span>
+        <label class="search-box" for="searchInput">
+            <span class="search-icon">⌕</span>
 
-                <input
-                    type="text"
-                    id="searchInput"
-                    placeholder="Search products, categories or stores..."
-                    autocomplete="off"
-                >
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search products, categories or stores..."
+                autocomplete="off"
+            >
 
-                <button
-                    class="clear-search"
-                    id="clearSearch"
-                    type="button"
-                    aria-label="Clear search"
-                >
-                    ×
-                </button>
+            <button
+                class="clear-search"
+                id="clearSearch"
+                type="button"
+                aria-label="Clear search"
+            >
+                ×
+            </button>
+        </label>
 
-            </label>
+        <select id="storeFilter" class="filter-select">
+            <option value="All">All stores</option>
+        </select>
 
+        <select id="sortSelect" class="filter-select">
+            <option value="latest">Latest</option>
+            <option value="oldest">Oldest</option>
+            <option value="price-low">Price: Low to high</option>
+            <option value="price-high">Price: High to low</option>
+        </select>
 
-            <div
-                class="category-chips"
-                id="categoryChips"
-                aria-label="Product categories"
-            ></div>
+    </div>
 
-        </div>
+    <div
+        class="category-chips"
+        id="categoryChips"
+        aria-label="Product categories">
+    </div>
+
+</div>
 
 
         <!-- STORE / PRODUCT SECTIONS -->
