@@ -1,8 +1,3 @@
-/* =========================================================
-   HELLO MADHU — ONLINE PICKS
-   Warm Cream + Terracotta Theme
-   ========================================================= */
-
 :root {
     --bg: #faf8f5;
     --surface: #ffffff;
@@ -19,8 +14,6 @@
     --accent: #c97963;
     --accent-dark: #9f5545;
     --accent-soft: #f7e9e4;
-
-    --success: #5f765f;
 
     --shadow-sm: 0 3px 14px rgba(40, 30, 25, 0.05);
     --shadow: 0 10px 30px rgba(40, 30, 25, 0.07);
@@ -112,7 +105,6 @@ a {
     background: #f4ebe7;
     color: #755248;
     font-size: 12px;
-    letter-spacing: 0.02em;
 }
 
 /* =========================================================
@@ -151,12 +143,10 @@ a {
     font-family: "Playfair Display", serif;
     font-size: 25px;
     font-weight: 600;
-    letter-spacing: -0.02em;
 }
 
 .brand-sub {
     margin-top: 5px;
-
     color: var(--muted);
     font-size: 10px;
     letter-spacing: 0.18em;
@@ -202,8 +192,6 @@ a {
     font-size: clamp(44px, 6vw, 76px);
     line-height: 0.98;
     letter-spacing: -0.045em;
-
-    max-width: 650px;
 }
 
 .hero-title span {
@@ -239,12 +227,11 @@ a {
 
     border-radius: 30px;
 
-    background:
-        linear-gradient(
-            145deg,
-            #f7dfd6 0%,
-            #f1cfc3 100%
-        );
+    background: linear-gradient(
+        145deg,
+        #f7dfd6 0%,
+        #f1cfc3 100%
+    );
 
     border: 1px solid #e7c4b8;
 
@@ -259,8 +246,6 @@ a {
     position: relative;
     z-index: 3;
 
-    height: 100%;
-
     min-height: 378px;
 
     display: flex;
@@ -269,6 +254,9 @@ a {
 }
 
 .hero-card-top {
+    position: relative;
+    z-index: 10;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -282,6 +270,9 @@ a {
 }
 
 .hero-card-star {
+    position: relative;
+    z-index: 20;
+
     font-size: 20px;
     color: #9f5545;
 }
@@ -313,10 +304,12 @@ a {
 
     font-size: clamp(40px, 5vw, 62px);
     line-height: 0.98;
-    letter-spacing: -0.035em;
 }
 
 .hero-card-bottom {
+    position: relative;
+    z-index: 10;
+
     display: flex;
     justify-content: space-between;
     gap: 15px;
@@ -334,12 +327,11 @@ a {
 
 .hero-orb {
     position: absolute;
+    z-index: 1;
 
     border-radius: 50%;
 
-    filter: blur(1px);
-
-    opacity: 0.65;
+    pointer-events: none;
 }
 
 .orb-one {
@@ -364,7 +356,7 @@ a {
 
 .hero-floating {
     position: absolute;
-    z-index: 5;
+    z-index: 20;
 
     display: flex;
     align-items: center;
@@ -375,18 +367,21 @@ a {
 
     border-radius: 50%;
 
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.85);
 
     color: var(--accent-dark);
 
     box-shadow: 0 8px 22px rgba(80, 45, 35, 0.1);
 
     font-size: 19px;
+
+    pointer-events: none;
 }
 
 .hero-floating.one {
     right: 28px;
-    bottom: 72px;
+    top: 28px;
+    bottom: auto;
 }
 
 .hero-floating.two {
@@ -395,7 +390,7 @@ a {
 }
 
 /* =========================================================
-   DISCOVERY SECTION
+   DISCOVERY
    ========================================================= */
 
 .discovery {
@@ -430,15 +425,22 @@ a {
     gap: 12px;
 }
 
+/*
+   SEARCH BOX
+   The icon and clear button stay INSIDE
+   the search input area.
+*/
+
 .search-box {
     position: relative;
+    width: 100%;
 }
 
 .search-box input {
     width: 100%;
     height: 48px;
 
-    padding: 0 17px;
+    padding: 0 45px 0 17px;
 
     border: 1px solid var(--line);
     border-radius: 12px;
@@ -450,10 +452,6 @@ a {
     color: var(--ink);
 
     box-shadow: var(--shadow-sm);
-
-    transition:
-        border-color 0.2s ease,
-        box-shadow 0.2s ease;
 }
 
 .search-box input::placeholder {
@@ -465,6 +463,59 @@ a {
 
     box-shadow:
         0 0 0 4px rgba(201, 121, 99, 0.1);
+}
+
+/* Search icon */
+.search-icon {
+    position: absolute;
+
+    right: 15px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    z-index: 5;
+
+    color: var(--muted-light);
+
+    font-size: 16px;
+
+    pointer-events: none;
+}
+
+/* Clear/X button */
+.clear-search {
+    position: absolute;
+
+    right: 40px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    z-index: 10;
+
+    width: 28px;
+    height: 28px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 0;
+
+    background: transparent;
+
+    color: var(--muted);
+
+    font-size: 17px;
+
+    line-height: 1;
+
+    cursor: pointer;
+}
+
+.clear-search:hover {
+    color: var(--accent-dark);
 }
 
 .filter-select {
@@ -482,10 +533,6 @@ a {
     color: var(--ink);
 
     cursor: pointer;
-}
-
-.filter-select:focus {
-    border-color: #d9a99b;
 }
 
 .category-chips {
@@ -520,13 +567,6 @@ a {
 
     font-size: 12px;
     font-weight: 600;
-
-    transition: all 0.2s ease;
-}
-
-.category-chip:hover {
-    border-color: #d9a99b;
-    color: var(--accent-dark);
 }
 
 .category-chip.active {
@@ -539,8 +579,6 @@ a {
 
 /* =========================================================
    PRODUCT GRID
-   IMPORTANT:
-   JS renders directly inside .stores-container
    ========================================================= */
 
 .stores-container {
@@ -576,14 +614,11 @@ a {
 
     transition:
         transform 0.25s ease,
-        box-shadow 0.25s ease,
-        border-color 0.25s ease;
+        box-shadow 0.25s ease;
 }
 
 .product-card:hover {
     transform: translateY(-4px);
-
-    border-color: #e3c6bc;
 
     box-shadow: var(--shadow-hover);
 }
@@ -601,24 +636,37 @@ a {
 
     overflow: hidden;
 
-    background: #f6f3f0;
+    background: #f5f1ed;
 }
 
 .product-image {
+    position: absolute;
+
+    inset: 0;
+
     width: 100%;
     height: 100%;
 
     object-fit: cover;
 
-    transition: transform 0.35s ease;
+    opacity: 0;
+
+    transition:
+        opacity 0.25s ease,
+        transform 0.35s ease;
 }
 
-.product-card:hover .product-image {
+.product-image.loaded {
+    opacity: 1;
+}
+
+.product-card:hover .product-image.loaded {
     transform: scale(1.035);
 }
 
 .image-placeholder {
     position: absolute;
+
     inset: 0;
 
     display: flex;
@@ -646,12 +694,8 @@ a {
     font-size: 20px;
 }
 
-.image-placeholder p {
-    font-size: 10px;
-}
-
 /* =========================================================
-   NEW BADGE
+   BADGE
    ========================================================= */
 
 .latest-badge {
@@ -659,6 +703,8 @@ a {
 
     top: 10px;
     left: 10px;
+
+    z-index: 5;
 
     padding: 5px 8px;
 
@@ -670,7 +716,6 @@ a {
 
     font-size: 9px;
     font-weight: 800;
-    letter-spacing: 0.08em;
 
     box-shadow: 0 3px 10px rgba(30, 20, 15, 0.08);
 }
@@ -703,13 +748,13 @@ a {
 
     font-size: 10px;
     font-weight: 800;
+
     letter-spacing: 0.09em;
     text-transform: uppercase;
 }
 
 .rating {
     color: #b78635;
-
     font-size: 11px;
 }
 
@@ -792,9 +837,7 @@ a {
     font-size: 12px;
     font-weight: 700;
 
-    transition:
-        background 0.2s ease,
-        transform 0.2s ease;
+    transition: all 0.2s ease;
 }
 
 .buy-button:hover {
@@ -805,12 +848,10 @@ a {
 
 .buy-button span {
     margin-left: 7px;
-
-    font-size: 15px;
 }
 
 /* =========================================================
-   MULTIPLE LINKS
+   LINKS
    ========================================================= */
 
 .product-links {
@@ -828,7 +869,6 @@ a {
 
     font-size: 10px;
     font-weight: 700;
-    letter-spacing: 0.05em;
     text-transform: uppercase;
 }
 
@@ -848,8 +888,6 @@ a {
     color: var(--muted);
 
     font-size: 10px;
-
-    transition: all 0.2s ease;
 }
 
 .links-list a:hover {
@@ -861,7 +899,7 @@ a {
 }
 
 /* =========================================================
-   EMPTY STATE
+   EMPTY
    ========================================================= */
 
 .empty-state {
@@ -892,7 +930,7 @@ a {
 }
 
 /* =========================================================
-   TRUST SECTION
+   TRUST
    ========================================================= */
 
 .trust-section {
@@ -964,30 +1002,23 @@ a {
 
 .footer-brand {
     font-family: "Playfair Display", serif;
-
     font-size: 22px;
 }
 
 .footer-copy {
     color: var(--muted);
-
     font-size: 11px;
 }
 
 /* =========================================================
-   RESPONSIVE — TABLET
+   TABLET
    ========================================================= */
 
 @media (max-width: 1000px) {
 
     .hero-inner {
         grid-template-columns: 1fr 0.8fr;
-
         gap: 35px;
-    }
-
-    .hero-title {
-        font-size: clamp(42px, 6vw, 62px);
     }
 
     .stores-container {
@@ -996,30 +1027,18 @@ a {
 }
 
 /* =========================================================
-   RESPONSIVE — MOBILE
+   MOBILE
    ========================================================= */
 
 @media (max-width: 700px) {
 
     .container {
-        width: min(calc(100% - 24px), var(--container));
+        width: calc(100% - 24px);
     }
 
     .section {
         padding: 50px 0;
     }
-
-    /* HEADER */
-
-    .header-inner {
-        min-height: 65px;
-    }
-
-    .brand-name {
-        font-size: 22px;
-    }
-
-    /* HERO */
 
     .hero {
         padding: 45px 0 40px;
@@ -1027,13 +1046,12 @@ a {
 
     .hero-inner {
         grid-template-columns: 1fr;
-
         gap: 35px;
     }
 
     .hero-copy {
         text-align: center;
-        margin: 0 auto;
+        margin: auto;
     }
 
     .hero-eyebrow {
@@ -1047,20 +1065,13 @@ a {
     .hero-description {
         margin-left: auto;
         margin-right: auto;
-
         font-size: 14px;
-    }
-
-    .hero-visual {
-        width: 100%;
     }
 
     .hero-card {
         min-height: 390px;
 
         padding: 25px;
-
-        border-radius: 25px;
 
         transform: none;
     }
@@ -1069,39 +1080,35 @@ a {
         min-height: 340px;
     }
 
-    .hero-card-main {
-        padding: 40px 0;
-    }
-
-    .hero-card-main strong {
-        font-size: clamp(39px, 12vw, 52px);
-    }
-
-    /* DISCOVERY */
-
-    .discovery-header {
-        align-items: flex-start;
-        flex-direction: column;
-
-        gap: 8px;
-
-        margin-bottom: 20px;
-    }
-
-    /* FILTERS */
-
+    /* Filters */
     .filter-row {
         grid-template-columns: 1fr;
     }
 
-    .filter-select {
+    /*
+       MOBILE SEARCH
+       Keeps everything on the same input.
+    */
+
+    .search-box {
         width: 100%;
     }
 
-    /* =====================================================
-       MOBILE PRODUCT GRID
-       EXACTLY 2 PRODUCTS PER ROW
-       ===================================================== */
+    .search-box input {
+        height: 46px;
+        padding-left: 14px;
+        padding-right: 72px;
+    }
+
+    .search-icon {
+        right: 12px;
+    }
+
+    .clear-search {
+        right: 35px;
+    }
+
+    /* TWO PRODUCT COLUMNS */
 
     .stores-container {
         display: grid !important;
@@ -1109,18 +1116,10 @@ a {
         grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
 
         gap: 10px !important;
-
-        width: 100%;
     }
-
-    /* PRODUCT CARD */
 
     .product-card {
         border-radius: 12px;
-    }
-
-    .product-image-container {
-        aspect-ratio: 1 / 1;
     }
 
     .card-body {
@@ -1129,10 +1128,7 @@ a {
 
     .product-name {
         min-height: 36px;
-
         font-size: 12px;
-
-        line-height: 1.4;
     }
 
     .category {
@@ -1145,46 +1141,27 @@ a {
 
     .store-badge {
         max-width: 60px;
-
-        padding: 4px 6px;
-
         font-size: 7px;
     }
 
     .buy-button {
         min-height: 36px;
-
         margin-top: 10px;
-
-        border-radius: 9px;
-
         font-size: 10px;
     }
 
     .latest-badge {
         top: 7px;
         left: 7px;
-
-        padding: 4px 6px;
-
         font-size: 7px;
     }
-
-    /* TRUST */
 
     .trust-panel {
         grid-template-columns: 1fr;
     }
 
-    .trust-item {
-        padding: 20px;
-    }
-
-    /* FOOTER */
-
     .footer-inner {
         flex-direction: column;
-
         text-align: center;
     }
 }
@@ -1226,6 +1203,5 @@ a {
 
 :focus-visible {
     outline: 3px solid rgba(201, 121, 99, 0.35);
-
     outline-offset: 2px;
 }
