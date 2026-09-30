@@ -1,255 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#fbfaf8">
+    <title>Online Picks | Hello Madhu</title>
+    <meta name="description" content="Discover handpicked products featured in Hello Madhu videos. Browse useful finds, trending picks and everyday favorites.">
 
-    <!-- ===============================
-         Google Analytics
-    ================================ -->
-
-    <script async
-        src="https://www.googletagmanager.com/gtag/js?id=G-NP8F2S4STN">
-    </script>
-
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NP8F2S4STN"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-
+        function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-
         gtag('config', 'G-NP8F2S4STN');
     </script>
 
-
-    <!-- ===============================
-         Meta
-    ================================ -->
-
-    <meta charset="UTF-8">
-
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
-
-    <title>Online Picks | Hello Madhu Youtube Channel</title>
-
-    <meta name="description"
-        content="Discover the latest genuine products featured in our Hello Madhu Youtube Channel. Shop trusted recommendations with our affiliate links.">
-
-
-    <!-- ===============================
-         CSS
-    ================================ -->
-
-    <link rel="stylesheet"
-        href="style.css?v=17">
-
-
-    <!-- ===============================
-         Google Font
-    ================================ -->
-
-    <link rel="preconnect"
-        href="https://fonts.googleapis.com">
-
-    <link rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin>
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=24">
 </head>
-
-
 <body>
+    <div class="top-note"><span>✦</span> Handpicked finds from Hello Madhu <span class="top-note-dot">•</span> Updated regularly</div>
 
-
-    <!-- ===============================
-         HEADER
-    ================================ -->
-
-    <header>
-
-        <div class="container">
-
-            <h1>Online Picks</h1>
-
-            <p class="tagline">
-                Latest Genuine Online products featured in our Hello Madhu Youtube videos.
-            </p>
-
+    <header class="site-header">
+        <div class="container header-inner">
+            <a class="brand" href="./" aria-label="Online Picks home">
+                <span class="brand-mark">HM</span>
+                <span>
+                    <strong>Online Picks</strong>
+                    <small>by Hello Madhu</small>
+                </span>
+            </a>
+            <a class="header-link" href="#products">Explore picks <span>↓</span></a>
         </div>
-
     </header>
 
-
-    <!-- ===============================
-         MAIN
-    ================================ -->
-
-    <main class="container">
-
-
-        <!-- ===============================
-             SEARCH
-        ================================ -->
-
-        <section class="search-section">
-
-            <input
-                type="text"
-                id="searchInput"
-                placeholder="🔍 Search products..."
-                autocomplete="off">
-
+    <main>
+        <section class="hero">
+            <div class="container hero-grid">
+                <div class="hero-copy">
+                    <span class="eyebrow">SHOP THE PICKS</span>
+                    <h1>Things we found,<br><em>worth sharing.</em></h1>
+                    <p>Browse products featured in Hello Madhu videos — useful finds, pretty little things and everyday favorites, all in one place.</p>
+                    <div class="hero-actions">
+                        <a class="primary-btn" href="#products">Explore products <span>↗</span></a>
+                        <span class="hero-trust"><span class="trust-check">✓</span> Links go to the listed store</span>
+                    </div>
+                </div>
+                <div class="hero-card" aria-hidden="true">
+                    <div class="hero-card-glow"></div>
+                    <div class="hero-card-content">
+                        <span class="hero-mini-label">HELLO MADHU</span>
+                        <div class="hero-sparkle">✦</div>
+                        <strong>Curated.<br>Simple.<br>Useful.</strong>
+                        <span class="hero-card-caption">A little collection of things we love finding.</span>
+                    </div>
+                    <div class="hero-floating one">♡</div>
+                    <div class="hero-floating two">✦</div>
+                </div>
+            </div>
         </section>
 
+        <section class="container discovery" id="products">
+            <div class="discovery-head">
+                <div>
+                    <span class="section-kicker">THE COLLECTION</span>
+                    <h2>Find your next favorite</h2>
+                    <p>Search the collection or browse by category.</p>
+                </div>
+                <div class="live-count" id="productCount">Loading picks...</div>
+            </div>
 
-        <!-- ===============================
-             RESULT COUNT
-        ================================ -->
+            <div class="toolbar">
+                <label class="search-box" for="searchInput">
+                    <span class="search-icon">⌕</span>
+                    <input type="text" id="searchInput" placeholder="Search products, categories or stores..." autocomplete="off">
+                    <button class="clear-search" id="clearSearch" type="button" aria-label="Clear search">×</button>
+                </label>
+                <div class="category-chips" id="categoryChips" aria-label="Product categories"></div>
+            </div>
 
-        <section class="info-bar">
-
-            <p id="productCount">
-                Loading products...
-            </p>
-
+            <div id="productsContainer" class="stores-container"></div>
         </section>
 
-
-        <!-- ===============================
-             STORE SECTIONS
-        ================================ -->
-
-        <section
-            id="productsContainer"
-            class="stores-container">
-
-            <!-- Store sections are created by JavaScript -->
-
+        <section class="container trust-panel">
+            <div class="trust-icon">✓</div>
+            <div>
+                <strong>A simple note from us</strong>
+                <p>We share products featured through Hello Madhu. Prices and availability can change on the store's website. Some links may earn us a small commission at no extra cost to you.</p>
+            </div>
         </section>
-
     </main>
 
-
-    <!-- ===============================
-         FOOTER
-    ================================ -->
-
     <footer>
-
-        <div class="container">
-
-            <p>
-                <strong>Disclosure:</strong>
-                As an Online Products Associate, we earn from qualifying purchases.
-            </p>
-
-            <p>
-                © 2026 Hello,Madhu. All Rights Reserved.
-            </p>
-
+        <div class="container footer-inner">
+            <div>
+                <strong>Online Picks</strong>
+                <p>Curated finds from Hello Madhu.</p>
+            </div>
+            <div class="footer-right">
+                <span>Made with care ✦</span>
+                <span>© 2026 Hello,Madhu</span>
+            </div>
         </div>
-
     </footer>
 
-
-    <!-- ===============================
-         PRODUCT TEMPLATE
-    ================================ -->
-
     <template id="productTemplate">
-
         <article class="product-card">
-
-
-            <!-- Product Image -->
-
             <div class="product-image-container">
+                <img class="product-image" alt="" loading="lazy">
+                <div class="image-placeholder"><span>✦</span><p>Product image</p></div>
+                <span class="latest-badge">NEW</span>
+            </div>
 
-                <img
-                    class="product-image"
-                    alt="">
-
-                <div class="image-placeholder">
-
-                    <span>🛍️</span>
-
-                    <p>Product</p>
-
+            <div class="card-body">
+                <div class="card-meta">
+                    <span class="category"></span>
+                    <span class="rating" hidden>★ <b></b></span>
+                </div>
+                <h3 class="product-name"></h3>
+                <div class="product-bottom">
+                    <p class="price"></p>
+                    <span class="store-badge"></span>
                 </div>
 
+                <a class="buy-button" target="_blank" rel="noopener noreferrer">View product <span>↗</span></a>
+
+                <div class="product-links">
+                    <p class="links-title">Available options</p>
+                    <div class="links-list"></div>
+                </div>
             </div>
-
-
-            <!-- Card Header -->
-
-            <div class="card-header">
-
-                <span class="category"></span>
-
-                <span class="latest-badge">
-                    NEW
-                </span>
-
-            </div>
-
-
-            <!-- Product Name -->
-
-            <h3 class="product-name"></h3>
-
-
-            <!-- Price -->
-
-            <p class="price"></p>
-
-
-            <!-- Store -->
-
-            <span class="store-badge"></span>
-
-
-            <!-- Normal Buy Button -->
-
-            <a
-                class="buy-button"
-                target="_blank"
-                rel="noopener noreferrer">
-
-                Buy Now
-
-            </a>
-
-
-            <!-- Multiple Links -->
-
-            <div class="product-links">
-
-                <p class="links-title">
-                    Available Options
-                </p>
-
-                <div class="links-list"></div>
-
-            </div>
-
         </article>
-
     </template>
 
-
-    <!-- ===============================
-         JAVASCRIPT
-    ================================ -->
-
-    <script src="script.js?v=17"></script>
-
+    <script src="script.js?v=24"></script>
 </body>
-
 </html>
