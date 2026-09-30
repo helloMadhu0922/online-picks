@@ -4,9 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#f7f3ee">
 
 ```
+<meta name="theme-color" content="#f7f7f5">
+
 <title>Online Picks | Hello Madhu</title>
 
 <meta
@@ -36,7 +37,8 @@
     rel="stylesheet"
 >
 
-<link rel="stylesheet" href="style.css?v=25">
+<!-- Main CSS -->
+<link rel="stylesheet" href="style.css?v=32">
 ```
 
 </head>
@@ -44,47 +46,56 @@
 <body>
 
 ```
-<!-- TOP NOTE -->
+<!-- Top announcement -->
 <div class="top-note">
     <span>✦</span>
-    <span>Handpicked finds from Hello Madhu</span>
+    Handpicked finds from Hello Madhu
     <span class="top-note-dot">•</span>
-    <span>Updated regularly</span>
+    Updated regularly
 </div>
 
 
-<!-- HEADER -->
+<!-- Header -->
 <header class="site-header">
+
     <div class="container header-inner">
 
-        <a class="brand" href="./" aria-label="Online Picks home">
+        <a
+            class="brand"
+            href="./"
+            aria-label="Online Picks home"
+        >
             <span class="brand-mark">HM</span>
 
-            <span class="brand-copy">
+            <span>
                 <strong>Online Picks</strong>
                 <small>by Hello Madhu</small>
             </span>
         </a>
 
-        <a class="header-link" href="#products">
+
+        <a
+            class="header-link"
+            href="#products"
+        >
             Explore picks
             <span>↓</span>
         </a>
 
     </div>
+
 </header>
 
 
+<!-- Main content -->
 <main>
 
-    <!-- HERO -->
+    <!-- HERO SECTION -->
     <section class="hero">
-
-        <div class="hero-decoration hero-decoration-one"></div>
-        <div class="hero-decoration hero-decoration-two"></div>
 
         <div class="container hero-grid">
 
+            <!-- Hero text -->
             <div class="hero-copy">
 
                 <span class="eyebrow">
@@ -103,9 +114,13 @@
                     favorites, all in one place.
                 </p>
 
+
                 <div class="hero-actions">
 
-                    <a class="primary-btn" href="#products">
+                    <a
+                        class="primary-btn"
+                        href="#products"
+                    >
                         Explore products
                         <span>↗</span>
                     </a>
@@ -120,35 +135,74 @@
             </div>
 
 
-            <!-- HERO VISUAL -->
-            <div class="hero-visual" aria-hidden="true">
+            <!-- Hero visual -->
+            <div
+                class="hero-visual"
+                aria-hidden="true"
+            >
 
                 <div class="hero-card">
 
-                    <div class="hero-card-top">
-                        <span>HELLO MADHU</span>
-                        <span>✦</span>
-                    </div>
+                    <!-- Decorative circles -->
+                    <div class="hero-orb orb-one"></div>
+                    <div class="hero-orb orb-two"></div>
 
-                    <div class="hero-card-main">
-                        <div class="hero-circle"></div>
 
-                        <div class="hero-content">
-                            <span class="hero-small">A LITTLE COLLECTION OF</span>
+                    <div class="hero-card-content">
+
+                        <!-- Top -->
+                        <div class="hero-card-top">
+
+                            <span class="hero-mini-label">
+                                HELLO MADHU
+                            </span>
+
+                            <span class="hero-card-star">
+                                ✦
+                            </span>
+
+                        </div>
+
+
+                        <!-- Main -->
+                        <div class="hero-card-main">
+
+                            <span class="hero-small-title">
+                                SHOP THE PICKS
+                            </span>
 
                             <strong>
-                                Curated.
+                                Worth finding.
                                 <br>
-                                Simple.
-                                <br>
-                                Useful.
+                                Worth sharing.
                             </strong>
+
                         </div>
+
+
+                        <!-- Bottom -->
+                        <div class="hero-card-bottom">
+
+                            <span>
+                                CURATED FINDS
+                            </span>
+
+                            <span>
+                                AMAZON · MEESHO
+                            </span>
+
+                        </div>
+
                     </div>
 
-                    <div class="hero-card-bottom">
-                        <span>Things we love finding.</span>
-                        <span>♡</span>
+
+                    <!-- Floating decorations -->
+                    <div class="hero-floating one">
+                        ✦
+                    </div>
+
+                    <div class="hero-floating two">
+                        ♡
                     </div>
 
                 </div>
@@ -156,15 +210,21 @@
             </div>
 
         </div>
+
     </section>
 
 
-    <!-- PRODUCTS -->
-    <section class="container discovery" id="products">
+    <!-- PRODUCTS / DISCOVERY -->
+    <section
+        class="container discovery"
+        id="products"
+    >
 
+        <!-- Section heading -->
         <div class="discovery-head">
 
             <div>
+
                 <span class="section-kicker">
                     THE COLLECTION
                 </span>
@@ -176,69 +236,116 @@
                 <p>
                     Search the collection or browse by category.
                 </p>
+
             </div>
 
-            <div class="live-count" id="productCount">
+
+            <div
+                class="live-count"
+                id="productCount"
+            >
                 Loading picks...
             </div>
 
         </div>
 
 
-        <!-- TOOLBAR -->
-      <div class="toolbar">
+        <!-- Filters -->
+        <div class="toolbar">
 
-    <div class="filter-row">
+            <div class="filter-row">
 
-        <label class="search-box" for="searchInput">
-            <span class="search-icon">⌕</span>
+                <!-- Search -->
+                <label
+                    class="search-box"
+                    for="searchInput"
+                >
 
-            <input
-                type="text"
-                id="searchInput"
-                placeholder="Search products, categories or stores..."
-                autocomplete="off"
-            >
+                    <span class="search-icon">
+                        ⌕
+                    </span>
 
-            <button
-                class="clear-search"
-                id="clearSearch"
-                type="button"
-                aria-label="Clear search"
-            >
-                ×
-            </button>
-        </label>
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search products, categories or stores..."
+                        autocomplete="off"
+                    >
 
-        <select id="storeFilter" class="filter-select">
-            <option value="All">All stores</option>
-        </select>
+                    <button
+                        class="clear-search"
+                        id="clearSearch"
+                        type="button"
+                        aria-label="Clear search"
+                    >
+                        ×
+                    </button>
 
-        <select id="sortSelect" class="filter-select">
-            <option value="latest">Latest</option>
-            <option value="oldest">Oldest</option>
-            <option value="price-low">Price: Low to high</option>
-            <option value="price-high">Price: High to low</option>
-        </select>
-
-    </div>
-
-    <div
-        class="category-chips"
-        id="categoryChips"
-        aria-label="Product categories">
-    </div>
-
-</div>
+                </label>
 
 
-        <!-- STORE / PRODUCT SECTIONS -->
-        <div id="productsContainer" class="stores-container"></div>
+                <!-- Store filter -->
+                <select
+                    id="storeFilter"
+                    class="filter-select"
+                    aria-label="Filter by store"
+                >
+
+                    <option value="All">
+                        All stores
+                    </option>
+
+                </select>
+
+
+                <!-- Sort -->
+                <select
+                    id="sortSelect"
+                    class="filter-select"
+                    aria-label="Sort products"
+                >
+
+                    <option value="latest">
+                        Latest
+                    </option>
+
+                    <option value="oldest">
+                        Oldest
+                    </option>
+
+                    <option value="price-low">
+                        Price: Low to high
+                    </option>
+
+                    <option value="price-high">
+                        Price: High to low
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- Category buttons -->
+            <div
+                class="category-chips"
+                id="categoryChips"
+                aria-label="Product categories"
+            ></div>
+
+        </div>
+
+
+        <!-- Products -->
+        <div
+            id="productsContainer"
+            class="stores-container"
+        ></div>
 
     </section>
 
 
-    <!-- TRUST -->
+    <!-- Trust / disclosure section -->
     <section class="container trust-panel">
 
         <div class="trust-icon">
@@ -246,6 +353,7 @@
         </div>
 
         <div>
+
             <strong>
                 A simple note from us
             </strong>
@@ -256,6 +364,7 @@
                 website. Some links may earn us a small commission
                 at no extra cost to you.
             </p>
+
         </div>
 
     </section>
@@ -263,12 +372,13 @@
 </main>
 
 
-<!-- FOOTER -->
+<!-- Footer -->
 <footer>
 
     <div class="container footer-inner">
 
         <div>
+
             <strong>
                 Online Picks
             </strong>
@@ -276,11 +386,20 @@
             <p>
                 Curated finds from Hello Madhu.
             </p>
+
         </div>
 
+
         <div class="footer-right">
-            <span>Made with care ✦</span>
-            <span>© 2026 Hello,Madhu</span>
+
+            <span>
+                Made with care ✦
+            </span>
+
+            <span>
+                © 2026 Hello Madhu
+            </span>
+
         </div>
 
     </div>
@@ -288,23 +407,30 @@
 </footer>
 
 
-<!-- PRODUCT TEMPLATE -->
+<!-- PRODUCT CARD TEMPLATE -->
 <template id="productTemplate">
 
     <article class="product-card">
 
+        <!-- Product image -->
         <div class="product-image-container">
 
             <img
                 class="product-image"
                 alt=""
                 loading="lazy"
-                decoding="async"
             >
 
             <div class="image-placeholder">
-                <span>✦</span>
-                <p>Loading image...</p>
+
+                <span>
+                    ✦
+                </span>
+
+                <p>
+                    Product image
+                </p>
+
             </div>
 
             <span class="latest-badge">
@@ -314,22 +440,30 @@
         </div>
 
 
+        <!-- Product information -->
         <div class="card-body">
 
+            <!-- Category + rating -->
             <div class="card-meta">
 
                 <span class="category"></span>
 
-                <span class="rating" hidden>
-                    ★ <b></b>
+                <span
+                    class="rating"
+                    hidden
+                >
+                    ★
+                    <b></b>
                 </span>
 
             </div>
 
 
+            <!-- Product name -->
             <h3 class="product-name"></h3>
 
 
+            <!-- Price + store -->
             <div class="product-bottom">
 
                 <p class="price"></p>
@@ -339,6 +473,7 @@
             </div>
 
 
+            <!-- Main product link -->
             <a
                 class="buy-button"
                 target="_blank"
@@ -349,6 +484,7 @@
             </a>
 
 
+            <!-- Multiple links if available -->
             <div class="product-links">
 
                 <p class="links-title">
@@ -366,6 +502,7 @@
 </template>
 
 
+<!-- JavaScript -->
 <script src="script.js?v=31"></script>
 ```
 
