@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
         try {
 
             const response = await fetch(
-                "./products.json?v=35",
+                "./products.json?v=36",
                 {
                     cache: "no-store"
                 }
