@@ -328,5 +328,16 @@
         "image": "images/picker.jpeg",
         "affiliateLink": "https://www.meesho.com/af_invite/483243069:youtube_long_form:12366060?p_id=321725867&ext_id=5bjp9n&utm_source=youtube_long_form",
         "store": "Meesho"
+    },
+    {
+        "id": 31,
+        "name": "cute ct Key Holder",
+        "category": "Home Decor",
+        "price": "₹216",
+        "rating": 4.1,
+        "added": "2026-10-03",
+        "image": "images/CatKeyHolder.jpeg",
+        "affiliateLink": "https://www.meesho.com/af_invite/483243069:youtube_long_form:12523639?p_id=948300071&ext_id=fold0n&utm_source=youtube_long_form",
+        "store": "Meesho"
     }
 ]
