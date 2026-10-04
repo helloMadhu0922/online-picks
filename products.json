@@ -331,7 +331,7 @@
     },
     {
         "id": 31,
-        "name": "cute ct Key Holder",
+        "name": "cute cat Key Holder",
         "category": "Home Decor",
         "price": "₹216",
         "rating": 4.1,
@@ -339,5 +339,16 @@
         "image": "images/CatKeyHolder.jpeg",
         "affiliateLink": "https://www.meesho.com/af_invite/483243069:youtube_long_form:12523639?p_id=948300071&ext_id=fold0n&utm_source=youtube_long_form",
         "store": "Meesho"
-    }
+    },
+     {
+        "id": 32,
+        "name": "3 Short Kurtis",
+        "category": "Fashion",
+        "price": "₹220,233,320",
+        "rating": 4.1,
+        "added": "2026-10-04",
+        "image": "images/3ShortKurtis.jpeg",
+        "affiliateLink": "https://affiliate.meesho.com/collection/MTI2NTQ1ODQ6Ojo6Ojpub3JtYWw=",
+        "store": "Meesho"
+    }   
 ]
