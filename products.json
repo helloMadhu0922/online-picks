@@ -342,13 +342,24 @@
     },
      {
         "id": 32,
-        "name": "3 Short Kurtis",
+        "me": "3 Short Kurtis",
         "category": "Fashion",
         "price": "₹220,233,320",
         "rating": 4.1,
         "added": "2026-10-04",
         "image": "images/3ShortKurtis.jpeg",
         "affiliateLink": "https://affiliate.meesho.com/collection/MTI2NTQ1ODQ6Ojo6Ojpub3JtYWw=",
+        "store": "Meesho"    
+     },
+     {
+        "id": 3,
+        "me": "2 Bracelets",
+        "category": "Fashion",
+        "price": "₹150",
+        "rating": 4.1,
+        "added": "2026-10-06",
+        "image": "images/BeautifulBracelets.jpeg",
+        "affiliateLink": "https://affiliate.meesho.com/collection/MTI4MDc5MzM6Ojo6Ojpub3JtYWw=",
         "store": "Meesho"
     }   
 ]
