@@ -372,5 +372,16 @@
         "image": "images/ArtificialNails.jpeg",
         "affiliateLink": "https://www.meesho.com/af_invite/483243069:youtube_long_form:12900204?p_id=939013637&ext_id=fj2bk5&utm_source=youtube_long_form",
         "store": "Meesho"
+    }   ,
+    {
+        "id": 35,
+        "me": "Bangle Box",
+        "category": "Fashion",
+        "price": "₹277",
+        "rating": 4.4,
+        "added": "2026-10-08",
+        "image": "images/BangleBox.jpeg",
+        "affiliateLink": "https://www.meesho.com/af_invite/483243069:youtube_long_form:12995438?p_id=481671813&ext_id=7yrwcl&utm_source=youtube_long_form",
+        "store": "Meesho"
     }   
 ]
