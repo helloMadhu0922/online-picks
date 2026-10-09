@@ -372,7 +372,7 @@
         "image": "images/ArtificialNails.jpeg",
         "affiliateLink": "https://www.meesho.com/af_invite/483243069:youtube_long_form:12900204?p_id=939013637&ext_id=fj2bk5&utm_source=youtube_long_form",
         "store": "Meesho"
-    }   ,
+    },
     {
         "id": 35,
         "me": "Bangle Box",
@@ -383,5 +383,16 @@
         "image": "images/BangleBox.jpeg",
         "affiliateLink": "https://www.meesho.com/af_invite/483243069:youtube_long_form:12995438?p_id=481671813&ext_id=7yrwcl&utm_source=youtube_long_form",
         "store": "Meesho"
-    }   
+    },
+     {
+        "id": 36,
+        "me": "Fur Cloth",
+        "category": "useful",
+        "price": "₹190",
+        "rating": 4.0,
+        "added": "2026-10-09",
+        "image": "images/FurCloth.jpeg",
+        "affiliateLink": "https://affiliate.meesho.com/collection/MTMxMTk4OTk6Ojo6Ojpub3JtYWw=",
+        "store": "Meesho"
+     }
 ]
