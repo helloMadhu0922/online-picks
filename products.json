@@ -394,5 +394,16 @@
         "image": "images/FurCloth.jpeg",
         "affiliateLink": "https://affiliate.meesho.com/collection/MTMxMTk4OTk6Ojo6Ojpub3JtYWw=",
         "store": "Meesho"
+     },
+     {
+        "id": 37,
+        "me": "Oxidised Sets Under ₹150",
+        "category": "Fashion",
+        "price": "₹150",
+        "rating": 4.5,
+        "added": "2026-10-10",
+        "image": "images/OxidisedSets.jpeg",
+        "affiliateLink": "https://affiliate.meesho.com/collection/MTMyMjIwODY6Ojo6Ojpub3JtYWw=",
+        "store": "Meesho"
      }
 ]
