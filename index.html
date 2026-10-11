@@ -1,174 +1,224 @@
-<!DOCTYPE html>
+
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#faf8f5">
-    <title>Online Picks | Hello Madhu</title>
-    <meta name="description" content="Discover handpicked products featured in Hello Madhu videos. Browse useful finds, trending picks and everyday favorites.">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fffaf7">
+  <meta name="description" content="Curated, simple, useful finds from Hello Madhu.">
+  <title>Online Picks | Hello Madhu</title>
 
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NP8F2S4STN"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-NP8F2S4STN');
-    </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css?v=36">
 
-    <link rel="stylesheet" href="style.css?v=35">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NP8F2S4STN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-NP8F2S4STN');
+  </script>
+  <script src="./script.js?v=38" defer></script>
 </head>
+
 <body>
-    <div class="top-note">
-        <span aria-hidden="true">✦</span>
-        Handpicked finds from Hello Madhu
-        <span class="top-note-dot" aria-hidden="true">•</span>
-        Updated regularly
-    </div>
+  <div class="announcement">
+    Thoughtful finds for everyday life <span aria-hidden="true">✦</span>
+    Links go to the listed store
+  </div>
 
-    <header class="site-header">
-        <div class="container header-inner">
-            <a class="brand" href="./" aria-label="Online Picks home">
-                <span class="brand-mark">HM</span>
-                <span class="brand-copy">
-                    <strong>Online Picks</strong>
-                    <small>by Hello Madhu</small>
-                </span>
-            </a>
-            <a class="header-link" href="#products">Shop products <span aria-hidden="true">↓</span></a>
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="Hello Madhu Online Picks home">
+      <span class="brand-mark">HM</span>
+      <span class="brand-copy">
+        <strong>Hello Madhu</strong>
+        <small>ONLINE PICKS</small>
+      </span>
+    </a>
+    <a class="header-link" href="#products">
+      Explore picks <span aria-hidden="true">↗</span>
+    </a>
+  </header>
+
+  <main>
+    <!-- Products intentionally appear first on the page. -->
+    <section class="collection section-wrap" id="products">
+      <div class="collection-heading">
+        <div>
+          <p class="eyebrow">THE COLLECTION</p>
+          <h1>Find your next favourite.</h1>
+          <p class="section-subtitle">Useful little finds, picked with care.</p>
         </div>
-    </header>
-
-    <main>
-        <!-- Compact, product-first introduction -->
-        <section class="hero">
-            <div class="container hero-grid">
-                <div class="hero-copy">
-                    <span class="eyebrow">HELLO MADHU · ONLINE PICKS</span>
-                    <h1>Good finds,<br><em>worth sharing.</em></h1>
-                    <p>Products featured in Hello Madhu videos — useful finds, pretty little things and everyday favorites, all in one place.</p>
-                    <div class="hero-trust-row">
-                        <a class="hero-explore-btn" href="#products">Browse products <span aria-hidden="true">↓</span></a>
-                        <span class="hero-store-note"><span class="check" aria-hidden="true">✓</span> Shop through the listed store</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Product catalogue appears near the top -->
-        <section class="container discovery" id="products">
-            <div class="discovery-head">
-                <div>
-                    <span class="section-kicker">THE COLLECTION</span>
-                    <h2>Shop the picks</h2>
-                    <p>Find a product from a video or explore the collection.</p>
-                </div>
-                <div class="live-count" id="productCount" aria-live="polite">Loading picks...</div>
-            </div>
-
-            <div class="toolbar">
-                <div class="filter-row">
-                    <label class="search-box" for="searchInput">
-                        <span class="search-icon" aria-hidden="true">⌕</span>
-                        <input type="text" id="searchInput" placeholder="Search products, categories or stores..." autocomplete="off">
-                        <button class="clear-search" id="clearSearch" type="button" aria-label="Clear search">×</button>
-                    </label>
-
-                    <select id="storeFilter" class="filter-select" aria-label="Filter by store">
-                        <option value="All">All stores</option>
-                    </select>
-
-                    <select id="sortSelect" class="filter-select" aria-label="Sort products">
-                        <option value="latest">Latest</option>
-                        <option value="oldest">Oldest</option>
-                        <option value="price-low">Price: Low to high</option>
-                        <option value="price-high">Price: High to low</option>
-                    </select>
-                </div>
-                <div class="category-chips" id="categoryChips" aria-label="Product categories"></div>
-            </div>
-
-            <div id="productsContainer" class="stores-container" aria-live="polite"></div>
-        </section>
-
-        <!-- Promotional artwork retained below the catalogue -->
-        <section class="promo-section">
-            <div class="container promo-grid">
-                <div class="promo-copy">
-                    <span class="section-kicker">A LITTLE HELLO FROM US</span>
-                    <h2>Worth finding.<br><em>Worth sharing.</em></h2>
-                    <p>Hello Madhu brings together useful discoveries, pretty little things and everyday favorites. This collection makes it easier to find the products featured in our videos.</p>
-                    <a class="promo-link" href="#products">Explore the collection <span aria-hidden="true">↗</span></a>
-                </div>
-                <div class="promo-art" aria-hidden="true">
-                    <div class="promo-orb promo-orb-one"></div>
-                    <div class="promo-orb promo-orb-two"></div>
-                    <div class="promo-art-content">
-                        <div class="promo-art-top"><span>HELLO MADHU</span><span class="promo-star">✦</span></div>
-                        <div class="promo-art-main">
-                            <span>SHOP THE PICKS</span>
-                            <strong>Worth<br>finding.<br>Worth sharing.</strong>
-                        </div>
-                        <div class="promo-art-bottom"><span>CURATED FINDS</span><span>AMAZON · MEESHO</span></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="container disclosure-section">
-            <div class="disclosure-icon" aria-hidden="true">✓</div>
-            <div>
-                <strong>A simple note from us</strong>
-                <p>We share products featured through Hello Madhu. Prices and availability can change on the store's website. Some links may earn us a small commission at no extra cost to you.</p>
-            </div>
-        </section>
-    </main>
-
-    <footer class="site-footer">
-        <div class="container footer-inner">
-            <div>
-                <strong class="footer-brand">Online Picks</strong>
-                <p>Curated finds from Hello Madhu.</p>
-            </div>
-            <div class="footer-right">
-                <span>Made with care ✦</span>
-                <span>© 2026 Hello Madhu</span>
-            </div>
+        <div class="collection-count">
+          <strong id="productCount">—</strong>
+          <span>picks to explore</span>
         </div>
-    </footer>
+      </div>
 
-    <!-- Product template: class names are kept for script.js compatibility -->
-    <template id="productTemplate">
-        <article class="product-card">
-            <div class="product-image-container">
-                <img class="product-image" alt="" loading="lazy">
-                <div class="image-placeholder"><span aria-hidden="true">✦</span><p>Product image</p></div>
-                <span class="latest-badge">NEW</span>
-            </div>
-            <div class="card-body">
-                <div class="card-meta">
-                    <span class="category"></span>
-                    <span class="rating" hidden>★ <b></b></span>
-                </div>
-                <h3 class="product-name"></h3>
-                <div class="product-bottom">
-                    <p class="price"></p>
-                    <span class="store-badge"></span>
-                </div>
-                <a class="buy-button" target="_blank" rel="noopener noreferrer">View product <span aria-hidden="true">↗</span></a>
-                <div class="product-links">
-                    <p class="links-title">Available options</p>
-                    <div class="links-list"></div>
-                </div>
-            </div>
-        </article>
-    </template>
+      <div class="toolbar">
+        <label class="search-box">
+          <span class="sr-only">Search products</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="10.8" cy="10.8" r="6.8"></circle>
+            <path d="m16 16 4.5 4.5"></path>
+          </svg>
+          <input id="searchInput" type="search"
+                 placeholder="Search products…" autocomplete="off">
+        </label>
 
-    <script src="script.js?v=37"></script>
+        <label class="select-wrap">
+          <span class="sr-only">Filter by store</span>
+          <select id="storeFilter">
+            <option value="all">All stores</option>
+          </select>
+        </label>
+
+        <label class="select-wrap">
+          <span class="sr-only">Sort products</span>
+          <select id="sortSelect">
+            <option value="latest">Newest first</option>
+            <option value="oldest">Oldest first</option>
+            <option value="price-low">Price: low to high</option>
+            <option value="price-high">Price: high to low</option>
+            <option value="name">Name: A to Z</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="category-row" id="categoryFilters"
+           aria-label="Filter by category">
+        <button class="category-chip active" type="button"
+                data-category="all">All picks</button>
+      </div>
+
+      <div id="loadStatus" class="load-status"
+           role="status" aria-live="polite">Loading picks…</div>
+
+      <div class="products-grid" id="productsContainer"
+           aria-live="polite"></div>
+
+      <div class="empty-state" id="emptyState" hidden>
+        <span class="empty-icon" aria-hidden="true">⌕</span>
+        <h2>No picks found</h2>
+        <p>Try another search or choose a different category.</p>
+        <button class="button button-light" id="clearFilters" type="button">
+          Clear filters
+        </button>
+      </div>
+    </section>
+
+    <!-- Brand introduction appears after the product collection. -->
+    <section class="intro section-wrap" id="about">
+      <div class="intro-copy">
+        <p class="eyebrow">HELLO, I'M MADHU</p>
+        <h2>Curated.<br><em>Simple.</em> Useful.</h2>
+        <p>
+          A growing collection of products that caught my eye—from
+          everyday essentials to little things that make life more delightful.
+        </p>
+        <a class="text-link" href="#products">
+          Explore the picks <span aria-hidden="true">→</span>
+        </a>
+      </div>
+
+      <div class="intro-art" aria-label="Decorative gift illustration">
+        <div class="art-sun"></div>
+        <div class="art-card">
+          <span class="art-spark">✳</span>
+          <div class="gift-box"><span></span></div>
+          <div class="art-flower">✿</div>
+          <p>little things<br>that make you smile</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Promotional section remains below the products. -->
+    <section class="promo-section section-wrap" id="featured">
+      <div class="promo-heading">
+        <div>
+          <p class="eyebrow">A LITTLE INSPIRATION</p>
+          <h2>Worth a closer look.</h2>
+        </div>
+        <p>Discover something lovely for yourself or someone you care about.</p>
+      </div>
+
+      <div class="promo-grid">
+        <a class="promo-card promo-card-one" href="#products">
+          <span class="promo-kicker">EVERYDAY FINDS</span>
+          <strong>Small things.<br>Big smiles.</strong>
+          <span class="promo-arrow">Explore picks ↗</span>
+          <span class="promo-decoration decor-circle"></span>
+          <span class="promo-decoration decor-star">✳</span>
+        </a>
+
+        <a class="promo-card promo-card-two" href="#products">
+          <span class="promo-kicker">GIFTING & MORE</span>
+          <strong>A little something<br>special.</strong>
+          <span class="promo-arrow">Browse the collection ↗</span>
+          <span class="promo-decoration decor-flower">✿</span>
+          <span class="promo-decoration decor-dot"></span>
+        </a>
+      </div>
+    </section>
+
+    <section class="disclosure section-wrap">
+      <span class="disclosure-icon" aria-hidden="true">ⓘ</span>
+      <p>
+        <strong>A quick note:</strong> Some links may be affiliate links,
+        which means Hello Madhu may earn a small commission if you purchase
+        through them, at no extra cost to you. Products are listed with
+        their store links so you can check the latest details there.
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <a class="brand footer-brand" href="./">
+      <span class="brand-mark">HM</span>
+      <span class="brand-copy">
+        <strong>Hello Madhu</strong>
+        <small>ONLINE PICKS</small>
+      </span>
+    </a>
+    <p>Curated with care. Shared with love.</p>
+    <span>© <span id="currentYear"></span> Hello Madhu</span>
+  </footer>
+
+  <template id="productTemplate">
+    <article class="product-card">
+      <a class="product-image-link" href="#"
+         target="_blank" rel="noopener noreferrer"
+         tabindex="-1" aria-hidden="true">
+        <div class="product-image-wrap">
+          <img class="product-image" loading="lazy" alt="">
+          <div class="image-placeholder">
+            <span>HM</span>
+            <small>Online Picks</small>
+          </div>
+          <span class="latest-badge" hidden>NEW</span>
+        </div>
+      </a>
+
+      <div class="product-content">
+        <div class="product-meta">
+          <span class="product-category"></span>
+          <span class="product-rating"></span>
+        </div>
+        <h2 class="product-name"></h2>
+        <div class="product-bottom">
+          <strong class="product-price"></strong>
+          <span class="product-store"></span>
+        </div>
+        <a class="buy-button" href="#"
+           target="_blank" rel="noopener noreferrer">
+          View at store <span aria-hidden="true">↗</span>
+        </a>
+        <div class="product-extra-links"></div>
+      </div>
+    </article>
+  </template>
 </body>
 </html>
