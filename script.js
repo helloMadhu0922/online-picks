@@ -1,1095 +1,556 @@
-/* =========================================================
-   HELLO MADHU — ONLINE PICKS
-   Main Product Script
-   ========================================================= */
 
-document.addEventListener("DOMContentLoaded", () => {
+(() => {
+  "use strict";
 
-    const productsContainer = document.getElementById("productsContainer");
-    const searchInput = document.getElementById("searchInput");
-    const productCount = document.getElementById("productCount");
-    const productTemplate = document.getElementById("productTemplate");
-    const categoryChips = document.getElementById("categoryChips");
-    const clearSearch = document.getElementById("clearSearch");
-    const storeFilter = document.getElementById("storeFilter");
-    const sortSelect = document.getElementById("sortSelect");
+  const $ = (selector, root = document) => root.querySelector(selector);
+  const $$ = (selector, root = document) =>
+    Array.from(root.querySelectorAll(selector));
 
-    let allProducts = [];
+  const state = {
+    products: [],
+    category: "all",
+    search: "",
+    store: "all",
+    sort: "latest"
+  };
 
-    let activeCategory = "All";
-    let activeStore = "All";
-    let activeSort = "latest";
+  const container = $("#productsContainer");
+  const template = $("#productTemplate");
+  const status = $("#loadStatus");
+  const emptyState = $("#emptyState");
+  const productCount = $("#productCount");
+  const categoryFilters = $("#categoryFilters");
+  const searchInput = $("#searchInput");
+  const storeFilter = $("#storeFilter");
+  const sortSelect = $("#sortSelect");
 
+  document.addEventListener("DOMContentLoaded", init);
 
-    /* =====================================================
-       LOAD PRODUCTS
-       ===================================================== */
+  async function init() {
+    $("#currentYear").textContent = String(new Date().getFullYear());
+    bindControls();
 
-    async function loadProducts() {
+    try {
+      const response = await fetch("./products.json?v=41", {
+        cache: "no-store"
+      });
 
-        try {
+      if (!response.ok) {
+        throw new Error(`products.json returned ${response.status}`);
+      }
 
-            const response = await fetch(
-                "./products.json?v=40",
-                {
-                    cache: "no-store"
-                }
-            );
+      const raw = await response.json();
+      const products = Array.isArray(raw)
+        ? raw
+        : Array.isArray(raw.products)
+          ? raw.products
+          : [];
 
-            if (!response.ok) {
-                throw new Error(
-                    `products.json failed: ${response.status}`
-                );
-            }
+      state.products = products
+        .filter(product => product && typeof product === "object")
+        .map((product, index) => ({
+          ...product,
+          _originalIndex: index,
+          _category: normalizeCategory(
+            product.category || product.categories || product.type || "Other"
+          ),
+          _name: String(
+            product.name || product.title || product.productName ||
+            "Untitled product"
+          ),
+          _store: String(
+            product.store || product.storeName || product.merchant ||
+            product.platform || "Store"
+          ),
+          _priceNumber: parsePrice(
+            product.price ?? product.salePrice ?? product.displayPrice
+          ),
+          _date: getProductDate(product)
+        }));
 
-            const products = await response.json();
+      buildCategoryFilters();
+      buildStoreFilter();
 
-            if (!Array.isArray(products)) {
-                throw new Error("products.json is not an array");
-            }
+      status.textContent = state.products.length
+        ? ""
+        : "No products were found. Check the contents of products.json.";
 
-            allProducts = products.map((product, index) => {
+      renderProducts();
+    } catch (error) {
+      console.error("Unable to load products:", error);
+      status.textContent =
+        "We couldn't load the products. Check that products.json is in the same folder as index.html and contains valid JSON.";
+      container.innerHTML = "";
+      productCount.textContent = "0";
+    }
+  }
 
-                return {
-                    ...product,
+  function bindControls() {
+    searchInput.addEventListener("input", () => {
+      state.search = searchInput.value.trim().toLowerCase();
+      renderProducts();
+    });
 
-                    originalIndex: index,
+    storeFilter.addEventListener("change", () => {
+      state.store = storeFilter.value;
+      renderProducts();
+    });
 
-                    displayCategory:
-                        normalizeCategory(product.category)
-                };
+    sortSelect.addEventListener("change", () => {
+      state.sort = sortSelect.value;
+      renderProducts();
+    });
 
-            });
+    categoryFilters.addEventListener("click", event => {
+      const button = event.target.closest("[data-category]");
+      if (!button) return;
 
-            allProducts.sort(
-                (a, b) =>
-                    (Number(b.id) || 0) -
-                    (Number(a.id) || 0)
-            );
+      state.category = button.dataset.category;
 
-            buildCategoryChips();
-            buildStoreFilter();
-            renderFiltered();
+      $$(".category-chip", categoryFilters).forEach(chip => {
+        chip.classList.toggle("active", chip === button);
+      });
 
-        } catch (error) {
+      renderProducts();
+    });
 
-            console.error(
-                "Failed to load products:",
-                error
-            );
+    $("#clearFilters").addEventListener("click", () => {
+      state.category = "all";
+      state.search = "";
+      state.store = "all";
+      state.sort = "latest";
 
-            if (productsContainer) {
+      searchInput.value = "";
+      storeFilter.value = "all";
+      sortSelect.value = "latest";
 
-                productsContainer.innerHTML = `
-                    <div class="empty-state">
-                        <h3>Products couldn't be loaded</h3>
-                        <p>Please refresh the page and try again.</p>
-                    </div>
-                `;
+      $$(".category-chip", categoryFilters).forEach(chip => {
+        chip.classList.toggle("active", chip.dataset.category === "all");
+      });
 
-            }
+      renderProducts();
+    });
+  }
 
-        }
+  function normalizeCategory(value) {
+    if (Array.isArray(value)) value = value[0];
+    return String(value || "Other").trim() || "Other";
+  }
 
+  function parsePrice(value) {
+    if (typeof value === "number") return value;
+
+    if (value === null || value === undefined || value === "") {
+      return Number.POSITIVE_INFINITY;
     }
 
+    const number = Number(String(value).replace(/[^0-9.]/g, ""));
+    return Number.isFinite(number)
+      ? number
+      : Number.POSITIVE_INFINITY;
+  }
 
-    /* =====================================================
-       CATEGORY NORMALIZATION
-       ===================================================== */
+  /*
+   * Supported date fields:
+   * dateAdded, addedAt, createdAt, created_at, addedDate,
+   * publishedAt, published_at, date, created, uploadDate.
+   *
+   * Products without a valid date will not get a NEW badge.
+   */
+  function getProductDate(product) {
+    const keys = [
+      "dateAdded",
+      "addedAt",
+      "createdAt",
+      "created_at",
+      "addedDate",
+      "publishedAt",
+      "published_at",
+      "date",
+      "created",
+      "uploadDate"
+    ];
 
-    function normalizeCategory(category) {
+    for (const key of keys) {
+      if (!product[key]) continue;
 
-        if (!category) {
-            return "Other";
-        }
+      const parsed = new Date(product[key]);
 
-        const value =
-            String(category).trim();
-
-        if (value.toLowerCase() === "gadget") {
-            return "Gadgets";
-        }
-
-        return value;
+      if (!Number.isNaN(parsed.getTime())) {
+        return parsed;
+      }
     }
 
+    return null;
+  }
 
-    /* =====================================================
-       CATEGORY CHIPS
-       ===================================================== */
+  // NEW only when the product was added within the previous 48 hours.
+  function isNewProduct(product) {
+    if (!product._date) return false;
 
-    function buildCategoryChips() {
+    const age = Date.now() - product._date.getTime();
 
-        if (!categoryChips) {
-            return;
-        }
+    return age >= 0 && age <= 48 * 60 * 60 * 1000;
+  }
 
-        const categories = [
-            ...new Set(
-                allProducts
-                    .map(product => product.displayCategory)
-                    .filter(Boolean)
-            )
-        ];
+  function buildCategoryFilters() {
+    const categories = [
+      ...new Set(state.products.map(product => product._category))
+    ]
+      .filter(category => category && category.toLowerCase() !== "all")
+      .sort((a, b) => a.localeCompare(b));
 
-        categories.sort(
-            (a, b) => a.localeCompare(b)
-        );
+    categoryFilters.innerHTML = "";
+    addCategoryButton("All picks", "all");
 
-        categoryChips.innerHTML = "";
+    categories.forEach(category => {
+      addCategoryButton(category, category);
+    });
+  }
 
-        const allButton =
-            document.createElement("button");
+  function addCategoryButton(label, value) {
+    const button = document.createElement("button");
 
-        allButton.type = "button";
+    button.type = "button";
+    button.className =
+      "category-chip" + (value === "all" ? " active" : "");
+    button.dataset.category = value;
+    button.textContent = label;
 
-        allButton.className =
-            "category-chip active";
+    categoryFilters.appendChild(button);
+  }
 
-        allButton.textContent = "All";
+  function buildStoreFilter() {
+    const stores = [
+      ...new Set(state.products.map(product => product._store))
+    ]
+      .filter(Boolean)
+      .sort((a, b) => a.localeCompare(b));
 
-        allButton.dataset.category = "All";
+    storeFilter.innerHTML = '<option value="all">All stores</option>';
 
-        categoryChips.appendChild(allButton);
+    stores.forEach(store => {
+      const option = document.createElement("option");
+      option.value = store;
+      option.textContent = store;
+      storeFilter.appendChild(option);
+    });
+  }
 
-        categories.forEach(category => {
+  function renderProducts() {
+    const filtered = state.products.filter(product => {
+      const matchesCategory =
+        state.category === "all" ||
+        product._category === state.category;
 
-            const button =
-                document.createElement("button");
+      const matchesStore =
+        state.store === "all" ||
+        product._store === state.store;
 
-            button.type = "button";
+      const searchable = [
+        product._name,
+        product._category,
+        product._store,
+        product.description,
+        product.brand,
+        product.tags
+      ]
+        .flat()
+        .filter(Boolean)
+        .join(" ")
+        .toLowerCase();
 
-            button.className =
-                "category-chip";
+      return (
+        matchesCategory &&
+        matchesStore &&
+        (!state.search || searchable.includes(state.search))
+      );
+    });
 
-            button.textContent = category;
+    filtered.sort((a, b) => {
+      if (state.sort === "oldest") {
+        return compareDates(a, b, true);
+      }
 
-            button.dataset.category = category;
+      if (state.sort === "price-low") {
+        return a._priceNumber - b._priceNumber;
+      }
 
-            categoryChips.appendChild(button);
+      if (state.sort === "price-high") {
+        return b._priceNumber - a._priceNumber;
+      }
 
+      if (state.sort === "name") {
+        return a._name.localeCompare(b._name);
+      }
+
+      return compareDates(a, b, false);
+    });
+
+    container.innerHTML = "";
+
+    const fragment = document.createDocumentFragment();
+
+    filtered.forEach(product => {
+      fragment.appendChild(createProductCard(product));
+    });
+
+    container.appendChild(fragment);
+
+    productCount.textContent = String(filtered.length);
+    emptyState.hidden = filtered.length > 0;
+
+    if (state.products.length > 0) {
+      status.textContent = "";
+    }
+  }
+
+  function compareDates(a, b, oldestFirst) {
+    // Prefer actual dates; otherwise use numeric IDs or JSON order.
+    if (a._date && b._date) {
+      const difference = a._date.getTime() - b._date.getTime();
+
+      if (difference !== 0) {
+        return oldestFirst ? difference : -difference;
+      }
+    } else if (a._date || b._date) {
+      return a._date ? -1 : 1;
+    }
+
+    const aId = Number(a.id);
+    const bId = Number(b.id);
+
+    if (
+      Number.isFinite(aId) &&
+      Number.isFinite(bId) &&
+      aId !== bId
+    ) {
+      return oldestFirst ? aId - bId : bId - aId;
+    }
+
+    return oldestFirst
+      ? a._originalIndex - b._originalIndex
+      : b._originalIndex - a._originalIndex;
+  }
+
+  function createProductCard(product) {
+    const fragment = template.content.cloneNode(true);
+    const card = $(".product-card", fragment);
+    const image = $(".product-image", fragment);
+    const placeholder = $(".image-placeholder", fragment);
+    const imageLink = $(".product-image-link", fragment);
+    const buyButton = $(".buy-button", fragment);
+
+    const name = product._name;
+    const storeUrl = firstValue(product, [
+      "url",
+      "link",
+      "productUrl",
+      "affiliateUrl",
+      "affiliateLink",
+      "buyLink",
+      "productLink",
+      "storeUrl"
+    ]);
+
+    const imageUrl = firstValue(product, [
+      "image",
+      "imageUrl",
+      "imageURL",
+      "img",
+      "photo",
+      "thumbnail"
+    ]);
+
+    const price =
+      product.price ?? product.salePrice ?? product.displayPrice ?? "";
+
+    const rating = product.rating ?? product.stars ?? "";
+
+    $(".product-name", fragment).textContent = name;
+    $(".product-category", fragment).textContent = product._category;
+    $(".product-store", fragment).textContent = product._store;
+    $(".product-price", fragment).textContent = formatPrice(price);
+    $(".product-rating", fragment).textContent =
+      rating ? `★ ${rating}` : "";
+
+    image.alt = name;
+    imageLink.setAttribute("aria-label", `View ${name}`);
+
+    if (imageUrl) {
+      image.src = resolveAssetUrl(imageUrl);
+
+      image.addEventListener("error", () => {
+        image.classList.add("is-hidden");
+        placeholder.classList.remove("is-hidden");
+      }, { once: true });
+
+      image.addEventListener("load", () => {
+        placeholder.classList.add("is-hidden");
+      }, { once: true });
+    } else {
+      image.classList.add("is-hidden");
+    }
+
+    if (storeUrl) {
+      const safeUrl = safeExternalUrl(storeUrl);
+
+      if (safeUrl) {
+        imageLink.href = safeUrl;
+        imageLink.removeAttribute("tabindex");
+        imageLink.removeAttribute("aria-hidden");
+
+        buyButton.href = safeUrl;
+
+        trackAffiliateClick(product, safeUrl, buyButton);
+        trackAffiliateClick(product, safeUrl, imageLink);
+      } else {
+        disableLink(imageLink, "Product link unavailable");
+        disableLink(buyButton, "Product link unavailable");
+      }
+    } else {
+      disableLink(imageLink, "Product link unavailable");
+      disableLink(buyButton, "Product link unavailable");
+    }
+
+    // Always set the badge explicitly; it never defaults to visible.
+    const badge = $(".latest-badge", fragment);
+    badge.hidden = !isNewProduct(product);
+
+    const extraLinks = $(".product-extra-links", fragment);
+
+    const extras = [
+      ["detailsUrl", "More details"],
+      ["reviewUrl", "Watch review"],
+      ["videoUrl", "Watch video"]
+    ];
+
+    extras.forEach(([key, label]) => {
+      if (!product[key]) return;
+
+      const url = safeExternalUrl(product[key]);
+      if (!url) return;
+
+      const link = document.createElement("a");
+      link.href = url;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.textContent = label;
+
+      link.addEventListener("click", () => {
+        trackEvent("product_extra_link_click", {
+          product_name: name,
+          link_type: key
         });
+      });
 
-        categoryChips
-            .querySelectorAll(".category-chip")
-            .forEach(button => {
+      extraLinks.appendChild(link);
+    });
 
-                button.addEventListener(
-                    "click",
-                    () => {
+    card.setAttribute(
+      "aria-label",
+      `${name}${price ? ", " + formatPrice(price) : ""}`
+    );
 
-                        activeCategory =
-                            button.dataset.category;
+    return fragment;
+  }
 
-                        categoryChips
-                            .querySelectorAll(
-                                ".category-chip"
-                            )
-                            .forEach(chip => {
+  function firstValue(object, keys) {
+    for (const key of keys) {
+      const value = object[key];
 
-                                chip.classList.toggle(
-                                    "active",
-                                    chip === button
-                                );
-
-                            });
-
-                        renderFiltered();
-
-                    }
-                );
-
-            });
-
+      if (typeof value === "string" && value.trim()) {
+        return value.trim();
+      }
     }
 
+    return "";
+  }
 
-    /* =====================================================
-       STORE FILTER
-       ===================================================== */
+  function resolveAssetUrl(path) {
+    const clean = String(path).trim();
 
-    function buildStoreFilter() {
-
-        if (!storeFilter) {
-            return;
-        }
-
-        const stores = [
-            ...new Set(
-                allProducts
-                    .map(product =>
-                        getStoreName(product)
-                    )
-                    .filter(Boolean)
-            )
-        ];
-
-        stores.sort(
-            (a, b) => a.localeCompare(b)
-        );
-
-        storeFilter.innerHTML =
-            `<option value="All">All Stores</option>`;
-
-        stores.forEach(store => {
-
-            const option =
-                document.createElement("option");
-
-            option.value = store;
-
-            option.textContent = store;
-
-            storeFilter.appendChild(option);
-
-        });
-
+    if (/^(https?:|data:|blob:)/i.test(clean)) {
+      return clean;
     }
 
+    return new URL(
+      clean.replace(/^\.?\//, ""),
+      document.baseURI
+    ).href;
+  }
 
-    /* =====================================================
-       STORE NAME
-       ===================================================== */
+  function safeExternalUrl(value) {
+    try {
+      const url = new URL(String(value), document.baseURI);
 
-    function getStoreName(product) {
-
-        if (product.store) {
-            return String(product.store);
-        }
-
-        if (
-            product.links &&
-            Array.isArray(product.links) &&
-            product.links.length
-        ) {
-
-            return (
-                product.links[0].store ||
-                product.links[0].name ||
-                ""
-            );
-
-        }
-
+      if (url.protocol !== "http:" && url.protocol !== "https:") {
         return "";
+      }
+
+      return url.href;
+    } catch (_) {
+      return "";
+    }
+  }
+
+  function disableLink(link, label) {
+    link.removeAttribute("href");
+    link.removeAttribute("target");
+    link.removeAttribute("rel");
+    link.setAttribute("aria-disabled", "true");
+
+    if (link.classList.contains("buy-button")) {
+      link.textContent = label;
+      link.style.opacity = ".55";
+      link.style.cursor = "not-allowed";
+    }
+  }
+
+  function formatPrice(value) {
+    if (value === null || value === undefined || value === "") {
+      return "Check price";
     }
 
-
-    /* =====================================================
-       FILTER + SORT
-       ===================================================== */
-
-    function renderFiltered() {
-
-        const searchTerm =
-            searchInput
-                ? searchInput.value
-                    .trim()
-                    .toLowerCase()
-                : "";
-
-        let filtered =
-            allProducts.filter(product => {
-
-                const matchesCategory =
-                    activeCategory === "All" ||
-                    product.displayCategory ===
-                        activeCategory;
-
-                const matchesStore =
-                    activeStore === "All" ||
-                    getStoreName(product) ===
-                        activeStore;
-
-                const searchableText = [
-                    product.name,
-                    product.category,
-                    product.store,
-                    product.description
-                ]
-                    .filter(Boolean)
-                    .join(" ")
-                    .toLowerCase();
-
-                const matchesSearch =
-                    !searchTerm ||
-                    searchableText.includes(searchTerm);
-
-                return (
-                    matchesCategory &&
-                    matchesStore &&
-                    matchesSearch
-                );
-
-            });
-
-        filtered =
-            sortProducts(
-                filtered,
-                activeSort
-            );
-
-        renderProducts(filtered);
-
+    if (typeof value === "number") {
+      return new Intl.NumberFormat("en-IN", {
+        style: "currency",
+        currency: "INR",
+        maximumFractionDigits: 0
+      }).format(value);
     }
 
+    const text = String(value).trim();
 
-    /* =====================================================
-       SORT
-       ===================================================== */
+    if (!text) return "Check price";
+    if (/^(₹|rs\.?|inr)/i.test(text)) return text;
 
-    function sortProducts(
-        products,
-        sortType
-    ) {
+    const number = Number(text.replace(/[^0-9.]/g, ""));
 
-        const result =
-            [...products];
-
-        switch (sortType) {
-
-            case "oldest":
-
-                return result.sort(
-                    (a, b) =>
-                        (Number(a.id) || 0) -
-                        (Number(b.id) || 0)
-                );
-
-            case "price-low":
-
-                return result.sort(
-                    (a, b) =>
-                        getPriceNumber(a.price) -
-                        getPriceNumber(b.price)
-                );
-
-            case "price-high":
-
-                return result.sort(
-                    (a, b) =>
-                        getPriceNumber(b.price) -
-                        getPriceNumber(a.price)
-                );
-
-            case "latest":
-
-            default:
-
-                return result.sort(
-                    (a, b) =>
-                        (Number(b.id) || 0) -
-                        (Number(a.id) || 0)
-                );
-        }
-
+    if (Number.isFinite(number) && number > 0) {
+      return new Intl.NumberFormat("en-IN", {
+        style: "currency",
+        currency: "INR",
+        maximumFractionDigits: 0
+      }).format(number);
     }
 
+    return text;
+  }
 
-    /* =====================================================
-       PRICE NUMBER
-       ===================================================== */
+  function trackAffiliateClick(product, url, element) {
+    element.addEventListener("click", () => {
+      trackEvent("affiliate_click", {
+        product_name: product._name,
+        store_name: product._store,
+        destination: url
+      });
+    });
+  }
 
-    function getPriceNumber(price) {
-
-        if (
-            price === null ||
-            price === undefined
-        ) {
-            return Number.MAX_SAFE_INTEGER;
-        }
-
-        const number =
-            String(price)
-                .replace(/[^\d.]/g, "");
-
-        const parsed =
-            parseFloat(number);
-
-        return Number.isNaN(parsed)
-            ? Number.MAX_SAFE_INTEGER
-            : parsed;
+  function trackEvent(name, params) {
+    if (typeof window.gtag === "function") {
+      window.gtag("event", name, params);
     }
-
-
-    /* =====================================================
-       RENDER PRODUCTS
-       ===================================================== */
-
-    function renderProducts(products) {
-
-        if (!productsContainer) {
-            return;
-        }
-
-        productsContainer.innerHTML = "";
-
-        if (productCount) {
-
-            productCount.textContent =
-                `${products.length} ${
-                    products.length === 1
-                        ? "product"
-                        : "products"
-                }`;
-
-        }
-
-        if (!products.length) {
-
-            productsContainer.innerHTML = `
-                <div class="empty-state">
-                    <h3>No products found</h3>
-                    <p>Try changing your search or filters.</p>
-                </div>
-            `;
-
-            return;
-        }
-
-        products.forEach(product => {
-
-            const card =
-                createProductCard(product);
-
-            if (card) {
-                productsContainer.appendChild(card);
-            }
-
-        });
-
-    }
-
-
-    /* =====================================================
-       CREATE PRODUCT CARD
-       ===================================================== */
-
-    function createProductCard(product) {
-
-        if (!productTemplate) {
-            return null;
-        }
-
-        const fragment =
-            productTemplate.content.cloneNode(true);
-
-        const card =
-            fragment.querySelector(".product-card");
-
-        const image =
-            fragment.querySelector(".product-image");
-
-        const placeholder =
-            fragment.querySelector(
-                ".image-placeholder"
-            );
-
-        const latestBadge =
-            fragment.querySelector(
-                ".latest-badge"
-            );
-
-        const category =
-            fragment.querySelector(".category");
-
-        const rating =
-            fragment.querySelector(".rating");
-
-        const ratingValue =
-            fragment.querySelector(
-                ".rating b"
-            );
-
-        const productName =
-            fragment.querySelector(
-                ".product-name"
-            );
-
-        const price =
-            fragment.querySelector(".price");
-
-        const storeBadge =
-            fragment.querySelector(
-                ".store-badge"
-            );
-
-        const buyButton =
-            fragment.querySelector(
-                ".buy-button"
-            );
-
-        const productLinks =
-            fragment.querySelector(
-                ".product-links"
-            );
-
-        const linksList =
-            fragment.querySelector(
-                ".links-list"
-            );
-
-
-        /* =================================================
-           CATEGORY
-           ================================================= */
-
-        if (category) {
-
-            category.textContent =
-                product.displayCategory ||
-                product.category ||
-                "Product";
-
-        }
-
-
-        /* =================================================
-           NAME
-           ================================================= */
-
-        if (productName) {
-
-            productName.textContent =
-                product.name ||
-                "Product";
-
-        }
-
-
-        /* =================================================
-           PRICE
-           ================================================= */
-
-        if (price) {
-
-            price.textContent =
-                product.price
-                    ? String(product.price)
-                    : "";
-
-        }
-
-
-        /* =================================================
-           STORE
-           ================================================= */
-
-        const storeName =
-            getStoreName(product);
-
-        if (storeBadge) {
-
-            storeBadge.textContent =
-                storeName || "Store";
-
-        }
-
-
-        /* =================================================
-           RATING
-           ================================================= */
-
-        if (
-            product.rating !== undefined &&
-            product.rating !== null &&
-            product.rating !== ""
-        ) {
-
-            if (rating) {
-                rating.hidden = false;
-            }
-
-            if (ratingValue) {
-                ratingValue.textContent =
-                    product.rating;
-            }
-
-        } else {
-
-            if (rating) {
-                rating.hidden = true;
-            }
-
-        }
-
-
-        /* =================================================
-           LATEST BADGE
-           ================================================= */
-
-        if (latestBadge) {
-
-            if (
-                product.isNew === false
-            ) {
-
-                latestBadge.style.display =
-                    "none";
-
-            }
-
-        }
-
-
-        /* =================================================
-           IMAGE
-           ================================================= */
-
-        setupProductImage(
-            image,
-            placeholder,
-            product.image,
-            product.name
-        );
-
-
-        /* =================================================
-           BUY LINK
-           ================================================= */
-
-        const primaryLink =
-            getPrimaryLink(product);
-
-        if (buyButton) {
-
-            if (primaryLink) {
-
-                buyButton.href =
-                    primaryLink;
-
-                buyButton.style.display =
-                    "flex";
-
-                buyButton.addEventListener(
-                    "click",
-                    () => {
-
-                        trackAffiliateClick(
-                            product
-                        );
-
-                    }
-                );
-
-            } else {
-
-                buyButton.style.display =
-                    "none";
-
-            }
-
-        }
-
-
-        /* =================================================
-           MULTIPLE LINKS
-           ================================================= */
-
-        if (
-            product.links &&
-            Array.isArray(product.links) &&
-            product.links.length
-        ) {
-
-            if (linksList) {
-
-                linksList.innerHTML = "";
-
-                product.links.forEach(
-                    link => {
-
-                        if (!link.url) {
-                            return;
-                        }
-
-                        const anchor =
-                            document.createElement("a");
-
-                        anchor.href =
-                            link.url;
-
-                        anchor.target =
-                            "_blank";
-
-                        anchor.rel =
-                            "noopener noreferrer";
-
-                        anchor.textContent =
-                            link.store ||
-                            link.name ||
-                            "View";
-
-                        anchor.addEventListener(
-                            "click",
-                            () => {
-
-                                trackAffiliateClick(
-                                    product,
-                                    link
-                                );
-
-                            }
-                        );
-
-                        linksList.appendChild(
-                            anchor
-                        );
-
-                    }
-                );
-
-            }
-
-        } else {
-
-            if (productLinks) {
-
-                productLinks.style.display =
-                    "none";
-
-            }
-
-        }
-
-
-        return card;
-
-    }
-
-
-    /* =====================================================
-       PRIMARY LINK
-       ===================================================== */
-
-    function getPrimaryLink(product) {
-
-        if (product.affiliateLink) {
-            return product.affiliateLink;
-        }
-
-        if (
-            product.links &&
-            Array.isArray(product.links)
-        ) {
-
-            const first =
-                product.links.find(
-                    link => link && link.url
-                );
-
-            return first
-                ? first.url
-                : "";
-        }
-
-        return "";
-
-    }
-
-
-    /* =====================================================
-       IMAGE URL
-       ===================================================== */
-
-    function getImageUrl(imagePath) {
-
-        if (!imagePath) {
-            return "";
-        }
-
-        let cleanPath =
-            String(imagePath).trim();
-
-        /*
-         * Remove leading ./ or /
-         * so GitHub Pages correctly resolves:
-         *
-         * images/file.jpeg
-         */
-
-        cleanPath =
-            cleanPath.replace(
-                /^(\.\/|\/)+/,
-                ""
-            );
-
-        /*
-         * document.baseURI on GitHub Pages
-         * should be:
-         *
-         * https://hellomadhu0922.github.io/online-picks/
-         */
-
-        try {
-
-            return new URL(
-                cleanPath,
-                document.baseURI
-            ).href;
-
-        } catch (error) {
-
-            console.error(
-                "Could not create image URL:",
-                imagePath,
-                error
-            );
-
-            return cleanPath;
-
-        }
-
-    }
-
-
-    /* =====================================================
-       SETUP IMAGE
-       ===================================================== */
-
-    function setupProductImage(
-        img,
-        placeholder,
-        imagePath,
-        productName
-    ) {
-
-        if (!img) {
-            return;
-        }
-
-        const imageUrl =
-            getImageUrl(imagePath);
-
-        if (!imageUrl) {
-
-            img.style.display =
-                "none";
-
-            if (placeholder) {
-                placeholder.style.display =
-                    "flex";
-            }
-
-            return;
-        }
-
-
-        /*
-         * IMPORTANT:
-         * Set handlers BEFORE src.
-         */
-
-        img.onload = () => {
-
-            img.classList.add(
-                "loaded"
-            );
-
-            img.style.display =
-                "block";
-
-            if (placeholder) {
-
-                placeholder.style.display =
-                    "none";
-
-            }
-
-        };
-
-
-        img.onerror = () => {
-
-            console.error(
-                "IMAGE FAILED TO LOAD:",
-                {
-                    product:
-                        productName,
-
-                    originalPath:
-                        imagePath,
-
-                    generatedUrl:
-                        imageUrl
-                }
-            );
-
-            img.classList.remove(
-                "loaded"
-            );
-
-            img.style.display =
-                "none";
-
-            if (placeholder) {
-
-                placeholder.style.display =
-                    "flex";
-
-            }
-
-        };
-
-
-        img.alt =
-            productName ||
-            "Product image";
-
-        img.loading =
-            "lazy";
-
-        img.decoding =
-            "async";
-
-        img.src =
-            imageUrl;
-
-
-        /*
-         * Handles browser cache.
-         */
-
-        if (
-            img.complete &&
-            img.naturalWidth > 0
-        ) {
-
-            img.onload();
-
-        }
-
-    }
-
-
-    /* =====================================================
-       SEARCH
-       ===================================================== */
-
-    if (searchInput) {
-
-        searchInput.addEventListener(
-            "input",
-            () => {
-
-                renderFiltered();
-
-            }
-        );
-
-    }
-
-
-    /* =====================================================
-       CLEAR SEARCH
-       ===================================================== */
-
-    if (clearSearch) {
-
-        clearSearch.addEventListener(
-            "click",
-            () => {
-
-                if (searchInput) {
-
-                    searchInput.value =
-                        "";
-
-                    searchInput.focus();
-
-                }
-
-                renderFiltered();
-
-            }
-        );
-
-    }
-
-
-    /* =====================================================
-       STORE FILTER
-       ===================================================== */
-
-    if (storeFilter) {
-
-        storeFilter.addEventListener(
-            "change",
-            () => {
-
-                activeStore =
-                    storeFilter.value;
-
-                renderFiltered();
-
-            }
-        );
-
-    }
-
-
-    /* =====================================================
-       SORT
-       ===================================================== */
-
-    if (sortSelect) {
-
-        sortSelect.addEventListener(
-            "change",
-            () => {
-
-                activeSort =
-                    sortSelect.value;
-
-                renderFiltered();
-
-            }
-        );
-
-    }
-
-
-    /* =====================================================
-       AFFILIATE ANALYTICS
-       ===================================================== */
-
-    function trackAffiliateClick(
-        product,
-        link = null
-    ) {
-
-        if (
-            typeof window.gtag !==
-            "function"
-        ) {
-            return;
-        }
-
-        window.gtag(
-            "event",
-            "affiliate_click",
-            {
-                product_name:
-                    product.name || "",
-
-                store:
-                    link?.store ||
-                    product.store ||
-                    "",
-
-                product_id:
-                    product.id || ""
-            }
-        );
-
-    }
-
-
-    /* =====================================================
-       START
-       ===================================================== */
-
-    loadProducts();
-
-});
+  }
+})();
