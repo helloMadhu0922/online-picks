@@ -438,5 +438,16 @@
         "image": "images/Orange Dress.jpeg",
         "affiliateLink": "https://www.meesho.com/af_invite/483243069:youtube_long_form:13492672?p_id=1082210143&ext_id=hwbiov&utm_source=youtube_long_form",
         "store": "Meesho"
+     },
+     {
+        "id": 41,
+        "me": "Burger Lamp",
+        "category": "Useful",
+        "price": "₹287",
+        "rating": 4.1,
+        "added": "2026-10-15",
+        "image": "images/BurgerLight.jpeg",
+        "affiliateLink": "https://www.meesho.com/af_invite/483243069:youtube_long_form:13675166?p_id=508468143&ext_id=8eq8j3&utm_source=youtube_long_form",
+        "store": "Meesho"
      }
 ]
