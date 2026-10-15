@@ -342,7 +342,7 @@
     },
      {
         "id": 32,
-        "me": "3 Short Kurtis",
+        "name": "3 Short Kurtis",
         "category": "Fashion",
         "price": "₹220,233,320",
         "rating": 4.1,
@@ -353,7 +353,7 @@
      },
      {
         "id": 33,
-        "me": "2 Bracelets",
+        "name": "2 Bracelets",
         "category": "Fashion",
         "price": "₹150",
         "rating": 4.9,
@@ -364,7 +364,7 @@
     },
     {
         "id": 34,
-        "me": "Artificial Nails",
+        "name": "Artificial Nails",
         "category": "Fashion",
         "price": "₹222",
         "rating": 4.3,
@@ -375,7 +375,7 @@
     },
     {
         "id": 35,
-        "me": "Bangle Box",
+        "name": "Bangle Box",
         "category": "Fashion",
         "price": "₹277",
         "rating": 4.4,
@@ -386,7 +386,7 @@
     },
      {
         "id": 36,
-        "me": "Fur Cloth",
+        "name": "Fur Cloth",
         "category": "useful",
         "price": "₹190",
         "rating": 4.0,
@@ -397,7 +397,7 @@
      },
      {
         "id": 37,
-        "me": "Oxidised Sets Under ₹150",
+        "name": "Oxidised Sets Under ₹150",
         "category": "Fashion",
         "price": "₹150",
         "rating": 4.5,
@@ -408,7 +408,7 @@
      },
      {
         "id": 38,
-        "me": "Thread Cutter",
+        "name": "Thread Cutter",
         "category": "useful",
         "price": "₹137",
         "rating": 5,
@@ -419,7 +419,7 @@
      },
      {
         "id": 39,
-        "me": "Multi Color Kashmiri Bangles",
+        "name": "Multi Color Kashmiri Bangles",
         "category": "Fashion",
         "price": "₹138",
         "rating": 4.5,
@@ -430,7 +430,7 @@
      },
      {
         "id": 40,
-        "me": "Rayon Short Kurti",
+        "name": "Rayon Short Kurti",
         "category": "Fashion",
         "price": "₹249",
         "rating": 4.0,
@@ -441,7 +441,7 @@
      },
      {
         "id": 41,
-        "me": "Burger Lamp",
+        "name": "Burger Lamp",
         "category": "Useful",
         "price": "₹287",
         "rating": 4.1,
