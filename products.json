@@ -449,5 +449,16 @@
         "image": "images/BurgerLight.jpeg",
         "affiliateLink": "https://www.meesho.com/af_invite/483243069:youtube_long_form:13675166?p_id=508468143&ext_id=8eq8j3&utm_source=youtube_long_form",
         "store": "Meesho"
+     },
+     {
+        "id": 42,
+        "name": "Taps",
+        "category": "Useful",
+        "price": "₹112",
+        "rating": 4.2,
+        "added": "2026-10-17",
+        "image": "images/Taps.jpeg",
+        "affiliateLink": "https://www.meesho.com/af_invite/483243069:youtube_long_form:13828245?p_id=622160820&ext_id=aaf2d0&utm_source=youtube_long_form",
+        "store": "Meesho"
      }
 ]
