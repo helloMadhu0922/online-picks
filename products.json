@@ -460,5 +460,16 @@
         "image": "images/Taps.png",
         "affiliateLink": "https://www.meesho.com/af_invite/483243069:youtube_long_form:13828245?p_id=622160820&ext_id=aaf2d0&utm_source=youtube_long_form",
         "store": "Meesho"
+     },
+     {
+        "id": 43,
+        "name": "Glue Gun",
+        "category": "Useful",
+        "price": "₹175",
+        "rating": 3.8,
+        "added": "2026-10-18",
+        "image": "images/GlueGun.png",
+        "affiliateLink": "https://www.meesho.com/af_invite/483243069:youtube_long_form:13913585?p_id=617987987&ext_id=a7xmkz&utm_source=youtube_long_form",
+        "store": "Meesho"
      }
 ]
