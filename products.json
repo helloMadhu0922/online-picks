@@ -471,5 +471,16 @@
         "image": "images/GlueGun.png",
         "affiliateLink": "https://www.meesho.com/af_invite/483243069:youtube_long_form:13913585?p_id=617987987&ext_id=a7xmkz&utm_source=youtube_long_form",
         "store": "Meesho"
+     },
+     {
+        "id": 44,
+        "name": "Jelly Fish Light",
+        "category": "Useful",
+        "price": "₹525",
+        "rating": 3.,7
+        "added": "2026-10-19",
+        "image": "images/JellyFishLight.png",
+        "affiliateLink": "https://www.meesho.com/af_invite/483243069:youtube_long_form:13975271?p_id=1028194358&ext_id=h05rue&utm_source=youtube_long_form",
+        "store": "Meesho"
      }
 ]
