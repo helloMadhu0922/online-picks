@@ -482,5 +482,27 @@
         "image": "images/JellyFishLight.jpeg",
         "affiliateLink": "https://www.meesho.com/af_invite/483243069:youtube_long_form:13975271?p_id=1028194358&ext_id=h05rue&utm_source=youtube_long_form",
         "store": "Meesho"
+     },
+    {
+        "id": 45,
+        "name": "Spoonset Lunch Box",
+        "category": "Useful",
+        "price": "₹180",
+        "rating": 4.2,
+        "added": "2026-10-21",
+        "image": "images/SpoonsetForLunchBox.jpeg",
+        "affiliateLink": "https://www.meesho.com/af_invite/483243069:youtube_long_form:14160215?p_id=352192625&ext_id=5topkh&utm_source=youtube_long_form",
+        "store": "Meesho"
+     },
+    {
+        "id": 47,
+        "name": "HeartSitting",
+        "category": "Decor",
+        "price": "₹148",
+        "rating": 4.2,
+        "added": "2026-10-21",
+        "image": "images/3DHeartSitting.jpeg",
+        "affiliateLink": "https://www.meesho.com/af_invite/483243069:youtube_long_form:14103305?p_id=933578170&ext_id=ffttiy&utm_source=youtube_long_form",
+        "store": "Meesho"
      }
 ]
