@@ -504,5 +504,27 @@
         "image": "images/3DHeartSitting.jpeg",
         "affiliateLink": "https://www.meesho.com/af_invite/483243069:youtube_long_form:14103305?p_id=933578170&ext_id=ffttiy&utm_source=youtube_long_form",
         "store": "Meesho"
+     },
+    {
+        "id": 48,
+        "name": "300 Stitching Threads",
+        "category": "Useful",
+        "price": "₹309",
+        "rating": 4.2,
+        "added": "2026-10-24",
+        "image": "images/Threads.jpeg",
+        "affiliateLink": "https://www.meesho.com/af_invite/483243069:youtube_long_form:14405134?p_id=502762869&ext_id=8bbyb9&utm_source=youtube_long_form",
+        "store": "Meesho"
+     },
+    {
+        "id": 49,
+        "name": "Jewellery Set",
+        "category": "Fashion",
+        "price": "₹775 && ₹701",
+        "rating": 4.5,
+        "added": "2026-10-24",
+        "image": "images/Jewels.jpeg",
+        "affiliateLink": "https://affiliate.meesho.com/collection/MTQ0MDU3MTU6Ojo6Ojpub3JtYWw=",
+        "store": "Meesho"
      }
 ]
