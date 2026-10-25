@@ -526,5 +526,16 @@
         "image": "images/Jewels.jpeg",
         "affiliateLink": "https://affiliate.meesho.com/collection/MTQ0MDU3MTU6Ojo6Ojpub3JtYWw=",
         "store": "Meesho"
+     },
+    {
+        "id": 50,
+        "name": "Temple Earrings",
+        "category": "Fashion",
+        "price": "₹119",
+        "rating": 4.6,
+        "added": "2026-10-25",
+        "image": "images/TempleEarrings.jpeg",
+        "affiliateLink": "https://www.meesho.com/af_invite/483243069:youtube_long_form:14528380?p_id=1084859301&ext_id=hxwasl&utm_source=youtube_long_form",
+        "store": "Meesho"
      }
 ]
