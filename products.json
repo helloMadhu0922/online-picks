@@ -537,5 +537,16 @@
         "image": "images/TempleEarrings.jpeg",
         "affiliateLink": "https://www.meesho.com/af_invite/483243069:youtube_long_form:14528380?p_id=1084859301&ext_id=hxwasl&utm_source=youtube_long_form",
         "store": "Meesho"
+     },
+    {
+        "id": 51,
+        "name": "Yellow Dress",
+        "category": "Fashion",
+        "price": "₹570",
+        "rating": 4.2,
+        "added": "2026-10-26",
+        "image": "images/YellowDress.jpeg",
+        "affiliateLink": "https://www.meesho.com/af_invite/483243069:youtube_long_form:14606201?p_id=1042178209&ext_id=h8hhup&utm_source=youtube_long_form",
+        "store": "Meesho"
      }
 ]
