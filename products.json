@@ -559,5 +559,16 @@
         "image": "images/LakshmiTempleEarrings.jpeg",
         "affiliateLink": "https://www.meesho.com/af_invite/483243069:youtube_long_form:14883124?p_id=983569103&ext_id=g9larz&utm_source=youtube_long_form",
         "store": "Meesho"
+     },
+     {
+        "id": 53,
+        "name": "Grill Roaster",
+        "category": "Useful Product",
+        "price": "₹147",
+        "rating": 4.2,
+        "added": "2026-10-30",
+        "image": "images/grillRoaster.jpeg",
+        "affiliateLink": "https://affiliate.meesho.com/collection/MTQ5Nzc3NTM6Ojo6Ojpub3JtYWw=",
+        "store": "Meesho"
      }
-]
+    ]
