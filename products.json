@@ -570,5 +570,27 @@
         "image": "images/grillRoaster.jpeg",
         "affiliateLink": "https://affiliate.meesho.com/collection/MTQ5Nzc3NTM6Ojo6Ojpub3JtYWw=",
         "store": "Meesho"
+     },
+     {
+        "id": 54,
+        "name": "Diwali Diyas",
+        "category": "Festival",
+        "price": "₹269",
+        "rating": 4.3,
+        "added": "2026-11-01",
+        "image": "images/DiwaliDiyas.jpeg",
+        "affiliateLink": "https://affiliate.meesho.com/collection/MTUwODc3Nzc6Ojo6Ojpub3JtYWw=",
+        "store": "Meesho"
+     },
+    {
+        "id": 55,
+        "name": "Long Frock",
+        "category": "Fashion",
+        "price": "₹611",
+        "rating": 4.3,
+        "added": "2026-11-01",
+        "image": "images/LongFrock.jpeg",
+        "affiliateLink": "https://affiliate.meesho.com/collection/MTUxNjE5NTE6Ojo6Ojpub3JtYWw=",
+        "store": "Meesho"
      }
-    ]
+     ]
