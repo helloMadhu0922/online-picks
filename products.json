@@ -592,5 +592,16 @@
         "image": "images/LongFrock.jpeg",
         "affiliateLink": "https://affiliate.meesho.com/collection/MTUxNjE5NTE6Ojo6Ojpub3JtYWw=",
         "store": "Meesho"
+     },
+     {
+        "id": 56,
+        "name": "Smokeless Diyas",
+        "category": "Useful",
+        "price": "₹222",
+        "rating": 4.3,
+        "added": "2026-11-02",
+        "image": "images/SmokelessDiyas.jpeg",
+        "affiliateLink": "https://affiliate.meesho.com/collection/MTUyNTU3MTQ6Ojo6Ojpub3JtYWw=",
+        "store": "Meesho"
      }
      ]
