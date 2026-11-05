@@ -614,5 +614,16 @@
         "image": "images/LintRemover.jpeg",
         "affiliateLink": "https://affiliate.meesho.com/collection/MTUzNDA0MDI6Ojo6Ojpub3JtYWw=",
         "store": "Meesho"
+     },
+    {
+        "id": 58,
+        "name": "Uthappam maker",
+        "category": "Useful",
+        "price": "₹299",
+        "rating": 4.3,
+        "added": "2026-11-05",
+        "image": "images/UthappamMaker.jpeg",
+        "affiliateLink": "https://affiliate.meesho.com/collection/MTU1MDYwMjI6Ojo6Ojpub3JtYWw=",
+        "store": "Meesho"
      }
      ]
