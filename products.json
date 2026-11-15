@@ -625,5 +625,93 @@
         "image": "images/UthappamMaker.jpeg",
         "affiliateLink": "https://affiliate.meesho.com/collection/MTU1MDYwMjI6Ojo6Ojpub3JtYWw=",
         "store": "Meesho"
+     },
+    {
+        "id": 59,
+        "name": "Puttu Maker",
+        "category": "Useful",
+        "price": "₹176",
+        "rating": 4.3,
+        "added": "2026-11-15",
+        "image": "images/puttu.jpeg",
+        "affiliateLink": "https://affiliate.meesho.com/collection/MTYxMzA3MzI6Ojo6Ojpub3JtYWw=",
+        "store": "Meesho"
+     },
+    {
+        "id": 60,
+        "name": "Decorative Pea Nut",
+        "category": "Useful",
+        "price": "₹267",
+        "rating": 4.1,
+        "added": "2026-11-15",
+        "image": "images/peanut.jpeg",
+        "affiliateLink": "https://affiliate.meesho.com/collection/MTYxMzIzNTg6Ojo6Ojpub3JtYWw=",
+        "store": "Meesho"
+     },
+    {
+        "id": 61,
+        "name": "Tea Filter",
+        "category": "Useful",
+        "price": "₹218",
+        "rating": 4.1,
+        "added": "2026-11-15",
+        "image": "images/teaFilter.jpeg",
+        "affiliateLink": "https://affiliate.meesho.com/collection/MTYxMzI0Nzc6Ojo6Ojpub3JtYWw=",
+        "store": "Meesho"
+     },
+    {
+        "id": 62,
+        "name": "Sandals",
+        "category": "Fashion",
+        "price": "₹333",
+        "rating": 4.2,
+        "added": "2026-11-15",
+        "image": "images/sandal.jpeg",
+        "affiliateLink": "https://affiliate.meesho.com/collection/MTYxMzI1OTM6Ojo6Ojpub3JtYWw=",
+        "store": "Meesho"
+     },
+    {
+        "id": 63,
+        "name": "Jewellery Set",
+        "category": "Fashion",
+        "price": "₹286",
+        "rating": 4.0,
+        "added": "2026-11-15",
+        "image": "images/neckSet.jpeg",
+        "affiliateLink": "https://affiliate.meesho.com/collection/MTYxMzI2ODg6Ojo6Ojpub3JtYWw=",
+        "store": "Meesho"
+     },
+    {
+        "id": 64,
+        "name": "Sauce Cups",
+        "category": "Useful",
+        "price": "₹217",
+        "rating": 3.9,
+        "added": "2026-11-15",
+        "image": "images/neckSet.jpeg",
+        "affiliateLink": "https://affiliate.meesho.com/collection/MTYxMzI4MTQ6Ojo6Ojpub3JtYWw=",
+        "store": "Meesho"
+     },
+    {
+        "id": 65,
+        "name": "Tissue Box",
+        "category": "Useful",
+        "price": "₹186",
+        "rating": 4.0,
+        "added": "2026-11-15",
+        "image": "images/tissueBox.jpeg",
+        "affiliateLink": "https://affiliate.meesho.com/collection/MTYxMzI5MTM6Ojo6Ojpub3JtYWw=",
+        "store": "Meesho"
+     },
+    {
+        "id": 66,
+        "name": "Earrings",
+        "category": "Fashion",
+        "price": "₹245",
+        "rating": 4.5,
+        "added": "2026-11-15",
+        "image": "images/earrings.jpeg",
+        "affiliateLink": "https://affiliate.meesho.com/collection/MTYxMzI5OTU6Ojo6Ojpub3JtYWw=",
+        "store": "Meesho"
      }
      ]
