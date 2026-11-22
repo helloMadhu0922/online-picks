@@ -713,5 +713,49 @@
         "image": "images/earrings.jpeg",
         "affiliateLink": "https://affiliate.meesho.com/collection/MTYxMzI5OTU6Ojo6Ojpub3JtYWw=",
         "store": "Meesho"
+     },
+    {
+        "id": 67,
+        "name": "Fancy Bangles",
+        "category": "Fashion",
+        "price": "₹311",
+        "rating": 4.3,
+        "added": "2026-11-22",
+        "image": "images/bangles.jpeg",
+        "affiliateLink": "https://affiliate.meesho.com/collection/MTY2NDgwOTU6Ojo6Ojpub3JtYWw=",
+        "store": "Meesho"
+     },
+    {
+        "id": 68,
+        "name": "Green Stone Earrings",
+        "category": "Fashion",
+        "price": "₹264",
+        "rating": 4.0,
+        "added": "2026-11-22",
+        "image": "images/greenEarrings.jpeg",
+        "affiliateLink": "https://affiliate.meesho.com/collection/MTY2NDgyNDc6Ojo6Ojpub3JtYWw=",
+        "store": "Meesho"
+     },
+    {
+        "id": 69,
+        "name": "Jewellery Set",
+        "category": "Fashion",
+        "price": "₹342",
+        "rating": 4.3,
+        "added": "2026-11-22",
+        "image": "images/jewellerySet.jpeg",
+        "affiliateLink": "https://affiliate.meesho.com/collection/MTY2NDgxNzM6Ojo6Ojpub3JtYWw=",
+        "store": "Meesho"
+     },
+    {
+        "id": 70,
+        "name": "Sink Strainer",
+        "category": "Useful",
+        "price": "₹169",
+        "rating": 3.9,
+        "added": "2026-11-22",
+        "image": "images/sinkstrainer.jpeg",
+        "affiliateLink": "https://affiliate.meesho.com/collection/MTY2NDc3NDM6Ojo6Ojpub3JtYWw=",
+        "store": "Meesho"
      }
      ]
