@@ -757,5 +757,16 @@
         "image": "images/sinkstrainer.jpeg",
         "affiliateLink": "https://affiliate.meesho.com/collection/MTY2NDc3NDM6Ojo6Ojpub3JtYWw=",
         "store": "Meesho"
+     },
+    {
+        "id": 71,
+        "name": "Mushroom Lamp",
+        "category": "Useful",
+        "price": "₹239",
+        "rating": 4.5,
+        "added": "2026-11-25",
+        "image": "images/MushroomLamp.jpeg",
+        "affiliateLink": "https://affiliate.meesho.com/collection/MTY4NTc3MDk6Ojo6Ojpub3JtYWw=",
+        "store": "Meesho"
      }
      ]
